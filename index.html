@@ -1,47 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0f19">
 
   <title>Peti — Private Money Ledger</title>
+
   <meta
     name="description"
-    content="Peti is a local-first personal finance ledger designed to keep your financial records encrypted on your device and under your control."
-  />
+    content="Peti is a local-first personal finance ledger designed to keep your financial records under your control."
+  >
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
     :root {
-      --bg: #080c13;
-      --bg-soft: #0c1119;
-      --card: #111a25;
-      --card-2: #0d151f;
-      --border: #1e2c3b;
-      --border-soft: rgba(255,255,255,.07);
+      --bg: #0b0f19;
+      --bg-2: #0e141e;
+      --panel: #111a26;
+      --panel-2: #0d1722;
 
-      --text: #f4f7fb;
-      --muted: #8298b4;
-      --muted-2: #5e7189;
+      --border: #223143;
+      --border-soft: rgba(255,255,255,.065);
 
-      --gold: #fbbd32;
-      --gold-light: #ffd568;
-      --gold-dark: #9b7115;
+      --text: #f5f7fa;
+      --muted: #8ea1b9;
+      --muted-2: #647890;
 
-      --green: #10c98b;
-      --green-soft: rgba(16,201,139,.12);
+      --gold: #f5b82e;
+      --gold-light: #ffd76a;
+      --gold-soft: rgba(245,184,46,.09);
+      --gold-border: rgba(245,184,46,.28);
+
+      --green: #10b981;
+      --green-soft: rgba(16,185,129,.09);
+      --green-border: rgba(16,185,129,.25);
 
       --blue: #6ea8ff;
+      --red: #ef7f7f;
 
       --max: 1220px;
       --radius: 22px;
+
+      --ease: cubic-bezier(.22,1,.36,1);
     }
 
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     html {
@@ -50,12 +56,27 @@
 
     body {
       background:
-        radial-gradient(circle at 50% -10%, rgba(251,189,50,.055), transparent 32%),
+        radial-gradient(
+          circle at 50% -10%,
+          rgba(245,184,46,.055),
+          transparent 32%
+        ),
         var(--bg);
+
       color: var(--text);
-      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
       line-height: 1.6;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
     body::before {
@@ -63,12 +84,20 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
+      z-index: -2;
+
       background-image:
         linear-gradient(rgba(255,255,255,.012) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,.012) 1px, transparent 1px);
+
       background-size: 80px 80px;
-      mask-image: linear-gradient(to bottom, black, transparent 75%);
-      z-index: -2;
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          black,
+          transparent 75%
+        );
     }
 
     a {
@@ -86,7 +115,7 @@
     }
 
     .section {
-      padding: 150px 0;
+      padding: 145px 0;
       border-top: 1px solid rgba(255,255,255,.055);
     }
 
@@ -94,47 +123,55 @@
       display: inline-flex;
       align-items: center;
       gap: 9px;
+
       color: var(--gold);
-      font-size: 12px;
+
+      font-size: 11px;
       font-weight: 800;
       letter-spacing: .16em;
       text-transform: uppercase;
+
       margin-bottom: 22px;
     }
 
     .eyebrow::before {
       content: "";
+
       width: 6px;
       height: 6px;
+
       border-radius: 50%;
+
       background: var(--gold);
-      box-shadow: 0 0 14px rgba(251,189,50,.8);
+
+      box-shadow:
+        0 0 14px rgba(245,184,46,.8);
+
+      animation: pulse 2s infinite;
     }
 
     h1,
     h2,
     h3 {
-      letter-spacing: -.045em;
+      letter-spacing: -.05em;
     }
 
-    .muted {
-      color: var(--muted);
-    }
-
-    /* =========================
-       HEADER
-    ========================= */
+    /* =========================================
+       NAV
+    ========================================= */
 
     header {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      z-index: 20;
+
+      z-index: 50;
     }
 
     .nav {
-      height: 88px;
+      height: 90px;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -143,75 +180,95 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 13px;
+
       font-size: 21px;
       font-weight: 800;
     }
 
     .brand img {
-      width: 44px;
-      height: 44px;
+      width: 45px;
+      height: 45px;
+
       object-fit: contain;
+
       border-radius: 11px;
     }
 
     .nav-right {
       color: var(--muted);
-      font-size: 14px;
+      font-size: 13px;
     }
 
-    /* =========================
+    /* =========================================
        HERO
-    ========================= */
+    ========================================= */
 
     .hero {
-      min-height: 850px;
-      padding-top: 150px;
+      min-height: 860px;
+
+      padding-top: 145px;
+      padding-bottom: 100px;
+
       display: flex;
       align-items: center;
-      position: relative;
     }
 
     .hero-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
+
       gap: 70px;
+
       align-items: center;
     }
 
     .hero-copy {
       position: relative;
-      z-index: 3;
+      z-index: 4;
     }
 
     .pill {
       display: inline-flex;
       align-items: center;
       gap: 9px;
+
       padding: 9px 15px;
-      border: 1px solid rgba(251,189,50,.3);
-      background: rgba(251,189,50,.07);
+
+      border:
+        1px solid var(--gold-border);
+
       border-radius: 999px;
+
+      background: var(--gold-soft);
+
       color: var(--gold-light);
+
       font-size: 12px;
       font-weight: 700;
+
       margin-bottom: 30px;
     }
 
     .pill-dot {
       width: 6px;
       height: 6px;
+
       border-radius: 50%;
+
       background: var(--gold);
-      box-shadow: 0 0 12px rgba(251,189,50,.8);
-      animation: pulse 2s infinite;
+
+      box-shadow:
+        0 0 12px rgba(245,184,46,.8);
     }
 
     .hero h1 {
+      max-width: 760px;
+
       font-size: clamp(60px, 6.7vw, 94px);
       line-height: .94;
-      max-width: 760px;
-      margin-bottom: 34px;
+
+      margin-bottom: 32px;
     }
 
     .hero h1 span {
@@ -220,206 +277,317 @@
     }
 
     .hero-description {
-      max-width: 640px;
-      color: #9aacc4;
+      max-width: 650px;
+
+      color: #9badc4;
+
       font-size: 18px;
       line-height: 1.85;
-      margin-bottom: 18px;
+
+      margin-bottom: 17px;
     }
 
     .hero-description strong {
       color: var(--text);
-      font-weight: 700;
     }
 
     .hero-subline {
       color: var(--muted-2);
+
       font-size: 14px;
-      margin-bottom: 35px;
+
+      margin-bottom: 34px;
     }
 
     .cta {
       display: inline-flex;
       align-items: center;
-      gap: 16px;
-      padding: 17px 23px;
-      border-radius: 12px;
+      justify-content: center;
+      gap: 15px;
+
+      min-height: 55px;
+
+      padding: 0 23px;
+
+      border-radius: 13px;
+
       background: var(--gold);
-      color: #090c11;
+
+      color: #0a0d12;
+
       font-size: 14px;
       font-weight: 800;
+
       box-shadow:
-        0 14px 40px rgba(251,189,50,.14),
-        inset 0 1px rgba(255,255,255,.35);
-      transition: transform .25s ease, box-shadow .25s ease;
+        0 15px 45px rgba(245,184,46,.14),
+        inset 0 1px rgba(255,255,255,.3);
+
+      transition:
+        transform .3s var(--ease),
+        box-shadow .3s var(--ease),
+        background .3s ease;
+
       position: relative;
       overflow: hidden;
     }
 
     .cta::after {
       content: "";
+
       position: absolute;
-      top: 0;
-      left: -100%;
-      width: 60%;
-      height: 100%;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.3),
-        transparent
-      );
-      transform: skewX(-20deg);
-      transition: left .6s ease;
+
+      width: 70px;
+      height: 150%;
+
+      left: -120px;
+      top: -20px;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(255,255,255,.32),
+          transparent
+        );
+
+      transform: rotate(20deg);
+
+      transition: left .7s ease;
     }
 
     .cta:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 18px 55px rgba(251,189,50,.24);
+      transform: translateY(-4px);
+
+      background: #ffc43f;
+
+      box-shadow:
+        0 20px 60px rgba(245,184,46,.22);
     }
 
     .cta:hover::after {
-      left: 150%;
+      left: 130%;
     }
 
     .cta-arrow {
       font-size: 18px;
+
+      transition:
+        transform .3s var(--ease);
     }
 
-    /* =========================
+    .cta:hover .cta-arrow {
+      transform: translateX(5px);
+    }
+
+    /* =========================================
        HERO PHONE
-    ========================= */
+    ========================================= */
 
     .hero-visual {
-      height: 620px;
+      height: 630px;
+
       position: relative;
+
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+
       perspective: 1200px;
+    }
+
+    .phone-glow {
+      position: absolute;
+
+      width: 430px;
+      height: 430px;
+
+      border-radius: 50%;
+
+      background: rgba(16,185,129,.055);
+
+      filter: blur(75px);
+
+      animation:
+        glowPulse 5s ease-in-out infinite;
     }
 
     .phone {
       width: 315px;
       height: 590px;
-      border-radius: 42px;
-      background: #101923;
-      border: 1px solid #314153;
+
       padding: 10px;
+
+      border:
+        1px solid #314154;
+
+      border-radius: 43px;
+
+      background: #101923;
+
       box-shadow:
-        0 40px 100px rgba(0,0,0,.55),
+        0 45px 110px rgba(0,0,0,.55),
         0 0 0 8px rgba(255,255,255,.025);
-      transform: rotateY(-7deg) rotateX(2deg);
-      animation: phoneFloat 5s ease-in-out infinite;
+
+      transform:
+        rotateY(-7deg)
+        rotateX(2deg);
+
+      animation:
+        phoneFloat 5s ease-in-out infinite;
+
       position: relative;
-      z-index: 2;
+      z-index: 3;
     }
 
     .phone-screen {
       height: 100%;
-      border-radius: 33px;
-      background:
-        radial-gradient(circle at 80% 0%, rgba(251,189,50,.06), transparent 35%),
-        #0d151e;
+
       padding: 35px 18px 20px;
+
+      border-radius: 34px;
+
+      background:
+        radial-gradient(
+          circle at 80% 0%,
+          rgba(245,184,46,.065),
+          transparent 35%
+        ),
+        #0d151e;
+
       overflow: hidden;
+
       position: relative;
     }
 
     .dynamic-island {
       position: absolute;
-      width: 84px;
-      height: 24px;
-      border-radius: 20px;
-      background: #05080c;
+
       top: 10px;
       left: 50%;
+
       transform: translateX(-50%);
+
+      width: 84px;
+      height: 24px;
+
+      border-radius: 20px;
+
+      background: #05080c;
     }
 
     .phone-top {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+
       margin-bottom: 30px;
     }
 
     .phone-title {
-      font-weight: 800;
       font-size: 16px;
+      font-weight: 800;
     }
 
     .lock {
       width: 31px;
       height: 31px;
-      border-radius: 9px;
+
       display: grid;
       place-items: center;
-      background: rgba(251,189,50,.1);
-      animation: lockPulse 3s ease-in-out infinite;
+
+      border-radius: 9px;
+
+      background: var(--gold-soft);
+
+      animation:
+        lockPulse 3s ease-in-out infinite;
     }
 
     .balance-label {
       color: var(--muted);
       font-size: 10px;
-      margin-bottom: 4px;
     }
 
     .balance {
       font-size: 30px;
-      font-weight: 800;
+      font-weight: 850;
+
       letter-spacing: -.04em;
     }
 
     .growth {
       display: inline-block;
+
       margin-top: 7px;
+
       padding: 5px 8px;
+
       border-radius: 7px;
+
       background: var(--green-soft);
+
       color: var(--green);
+
       font-size: 9px;
       font-weight: 700;
     }
 
     .chart {
       height: 100px;
-      margin-top: 26px;
+
+      margin-top: 25px;
+
       border-radius: 15px;
-      background: rgba(16,201,139,.035);
-      border: 1px solid rgba(16,201,139,.08);
+
+      background:
+        rgba(16,185,129,.035);
+
+      border:
+        1px solid rgba(16,185,129,.08);
+
       position: relative;
       overflow: hidden;
     }
 
     .chart svg {
       position: absolute;
+
       inset: 20px 13px;
+
       width: calc(100% - 26px);
       height: calc(100% - 40px);
+
       overflow: visible;
     }
 
     .chart-path {
       fill: none;
+
       stroke: var(--green);
+
       stroke-width: 3;
+
       stroke-linecap: round;
       stroke-linejoin: round;
+
       stroke-dasharray: 500;
       stroke-dashoffset: 500;
-      animation: drawChart 2.8s ease forwards .8s;
+
+      animation:
+        drawChart 2.8s ease forwards .8s;
     }
 
     .activity-title {
       display: flex;
       justify-content: space-between;
+
       margin: 25px 0 12px;
+
       font-size: 11px;
       font-weight: 800;
     }
 
-    .activity-title span {
+    .activity-title span:last-child {
       color: var(--gold);
       font-size: 9px;
     }
@@ -428,13 +596,18 @@
       display: flex;
       align-items: center;
       gap: 10px;
+
       padding: 11px 0;
-      border-bottom: 1px solid rgba(255,255,255,.055);
-      animation: transactionIn .7s ease both;
+
+      border-bottom:
+        1px solid rgba(255,255,255,.055);
+
+      animation:
+        transactionIn .7s ease both;
     }
 
     .transaction:nth-child(2) {
-      animation-delay: .4s;
+      animation-delay: .35s;
     }
 
     .transaction:nth-child(3) {
@@ -448,11 +621,16 @@
     .transaction-icon {
       width: 32px;
       height: 32px;
-      border-radius: 10px;
-      background: #172432;
+
       display: grid;
       place-items: center;
+
+      border-radius: 10px;
+
+      background: #172432;
+
       color: var(--gold);
+
       font-size: 10px;
       font-weight: 800;
     }
@@ -467,9 +645,11 @@
     }
 
     .transaction-date {
-      color: var(--muted-2);
-      font-size: 8px;
       margin-top: 2px;
+
+      color: var(--muted-2);
+
+      font-size: 8px;
     }
 
     .transaction-value {
@@ -479,35 +659,52 @@
 
     .floating-card {
       position: absolute;
-      background: rgba(16,25,36,.94);
-      border: 1px solid #26384b;
+
+      z-index: 5;
+
+      padding: 18px;
+
+      border:
+        1px solid #26384a;
+
       border-radius: 17px;
-      backdrop-filter: blur(14px);
-      box-shadow: 0 25px 60px rgba(0,0,0,.3);
-      z-index: 4;
+
+      background:
+        rgba(16,25,36,.94);
+
+      backdrop-filter: blur(15px);
+
+      box-shadow:
+        0 25px 60px rgba(0,0,0,.3);
     }
 
     .privacy-card {
       left: 0;
-      top: 150px;
+      top: 155px;
+
       width: 195px;
-      padding: 18px;
-      animation: floatLeft 4.5s ease-in-out infinite;
+
+      animation:
+        floatLeft 4.5s ease-in-out infinite;
     }
 
     .upcoming-card {
-      right: -10px;
-      bottom: 60px;
+      right: -5px;
+      bottom: 55px;
+
       width: 210px;
-      padding: 18px;
-      animation: floatRight 5s ease-in-out infinite;
+
+      animation:
+        floatRight 5s ease-in-out infinite;
     }
 
     .floating-label {
       color: var(--muted);
+
       font-size: 9px;
       letter-spacing: .12em;
       text-transform: uppercase;
+
       margin-bottom: 8px;
     }
 
@@ -518,69 +715,97 @@
 
     .floating-text {
       color: var(--muted);
+
       font-size: 9px;
+
       margin-top: 3px;
     }
 
-    /* =========================
+    /* =========================================
        INTRO
-    ========================= */
+    ========================================= */
 
     .intro {
-      text-align: center;
-      max-width: 1000px;
+      max-width: 980px;
       margin: auto;
+
+      text-align: center;
     }
 
     .intro h2 {
-      font-size: clamp(42px, 5vw, 68px);
+      font-size: clamp(43px, 5vw, 70px);
       line-height: 1.02;
-      margin-bottom: 25px;
+
+      margin-bottom: 26px;
     }
 
     .intro p {
-      color: var(--muted);
       max-width: 820px;
       margin: auto;
+
+      color: var(--muted);
+
       font-size: 17px;
-      line-height: 1.8;
+      line-height: 1.85;
     }
 
-    .highlight-box {
-      margin: 55px auto 0;
+    .highlight {
       max-width: 880px;
+
+      margin: 50px auto 0;
+
       padding: 28px 35px;
-      border: 1px solid rgba(251,189,50,.3);
+
+      border:
+        1px solid var(--gold-border);
+
       border-radius: 18px;
-      background: rgba(251,189,50,.055);
+
+      background:
+        var(--gold-soft);
+
       color: #aebdd0;
     }
 
-    .highlight-box strong {
+    .highlight strong {
       color: var(--gold);
     }
 
-    /* =========================
-       LEDGER SECTION
-    ========================= */
+    /* =========================================
+       SPLIT SECTIONS
+    ========================================= */
 
     .split {
       display: grid;
-      grid-template-columns: .85fr 1.15fr;
+
+      grid-template-columns:
+        .85fr 1.15fr;
+
       gap: 80px;
+
       align-items: center;
+    }
+
+    .split.reverse {
+      grid-template-columns:
+        1.15fr .85fr;
     }
 
     .split h2 {
       font-size: clamp(43px, 4.5vw, 66px);
+
       line-height: 1.02;
+
       margin-bottom: 25px;
     }
 
     .split p {
       color: var(--muted);
+
       font-size: 17px;
+
       line-height: 1.9;
+
       margin-bottom: 25px;
     }
 
@@ -592,36 +817,67 @@
     .check {
       display: flex;
       align-items: center;
+
       gap: 12px;
-      color: #c7d4e3;
+
+      color: #c8d4e3;
+
       font-size: 14px;
     }
 
     .check-icon {
       width: 23px;
       height: 23px;
-      border: 1px solid rgba(251,189,50,.3);
-      border-radius: 7px;
-      color: var(--gold);
+
       display: grid;
       place-items: center;
-      font-size: 12px;
+
+      border:
+        1px solid var(--gold-border);
+
+      border-radius: 7px;
+
+      color: var(--gold);
+
+      font-size: 11px;
+
+      flex-shrink: 0;
     }
 
+    /* =========================================
+       LEDGER
+    ========================================= */
+
     .ledger-card {
-      background: linear-gradient(145deg, #131e29, #0d151e);
-      border: 1px solid #263748;
-      border-radius: 24px;
       padding: 25px;
-      box-shadow: 0 30px 90px rgba(0,0,0,.22);
+
+      border:
+        1px solid #263748;
+
+      border-radius: 24px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #131e29,
+          #0d151e
+        );
+
+      box-shadow:
+        0 30px 90px rgba(0,0,0,.22);
+
+      transition:
+        transform .35s var(--ease);
     }
 
     .ledger-header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+
       padding-bottom: 18px;
-      border-bottom: 1px solid var(--border-soft);
+
+      border-bottom:
+        1px solid var(--border-soft);
     }
 
     .ledger-header strong {
@@ -630,52 +886,72 @@
 
     .local-tag {
       color: var(--gold);
+
       font-size: 9px;
       font-weight: 800;
+
       letter-spacing: .1em;
     }
 
     .ledger-balance {
       padding: 30px 20px;
+
       margin-top: 20px;
+
       border-radius: 16px;
+
       background: #0d161f;
-      border: 1px solid rgba(255,255,255,.045);
+
+      border:
+        1px solid rgba(255,255,255,.045);
     }
 
     .ledger-balance-label {
       color: var(--muted);
+
       font-size: 11px;
     }
 
     .ledger-balance-value {
       font-size: 36px;
-      font-weight: 800;
-      margin-top: 3px;
+      font-weight: 850;
+
+      letter-spacing: -.04em;
     }
 
     .ledger-status {
       color: var(--green);
+
       font-size: 10px;
+
       margin-top: 7px;
     }
 
     .ledger-row {
       display: flex;
       align-items: center;
+
       gap: 15px;
+
       padding: 18px 5px;
-      border-bottom: 1px solid rgba(255,255,255,.055);
+
+      border-bottom:
+        1px solid rgba(255,255,255,.055);
     }
 
     .ledger-row-icon {
       width: 40px;
       height: 40px;
-      border-radius: 12px;
-      background: #172433;
+
       display: grid;
       place-items: center;
+
+      border-radius: 12px;
+
+      background: #172433;
+
       color: var(--gold);
+
       font-size: 12px;
       font-weight: 700;
     }
@@ -691,7 +967,9 @@
 
     .ledger-row-date {
       color: var(--muted-2);
+
       font-size: 9px;
+
       margin-top: 3px;
     }
 
@@ -700,67 +978,196 @@
       font-weight: 700;
     }
 
-    /* =========================
+    /* =========================================
+       "NOT YOUR BANK" SECTION
+    ========================================= */
+
+    .not-bank {
+      max-width: 950px;
+
+      margin: auto;
+
+      text-align: center;
+    }
+
+    .not-bank h2 {
+      font-size: clamp(43px, 5vw, 70px);
+
+      line-height: 1;
+
+      margin-bottom: 24px;
+    }
+
+    .not-bank > p {
+      max-width: 760px;
+
+      margin: auto;
+
+      color: var(--muted);
+
+      font-size: 17px;
+
+      line-height: 1.85;
+    }
+
+    .not-bank-grid {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 15px;
+
+      max-width: 850px;
+
+      margin: 55px auto 0;
+
+      text-align: left;
+    }
+
+    .not-bank-card {
+      padding: 25px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 18px;
+
+      background: var(--panel);
+
+      transition:
+        transform .3s var(--ease),
+        border-color .3s ease;
+    }
+
+    .not-bank-card:hover {
+      transform: translateY(-5px);
+
+      border-color:
+        var(--gold-border);
+    }
+
+    .not-bank-card h3 {
+      font-size: 14px;
+
+      margin-bottom: 15px;
+    }
+
+    .not-bank-card ul {
+      list-style: none;
+
+      display: grid;
+
+      gap: 10px;
+    }
+
+    .not-bank-card li {
+      display: flex;
+      align-items: center;
+
+      gap: 9px;
+
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+    .not-bank-card li::before {
+      content: "✓";
+
+      color: var(--green);
+
+      font-weight: 800;
+    }
+
+    .not-bank-card:nth-child(2) li::before {
+      color: var(--gold);
+    }
+
+    /* =========================================
        CAPTURE FLOW
-    ========================= */
+    ========================================= */
 
     .flow-header {
-      text-align: center;
       max-width: 850px;
+
       margin: auto;
+
+      text-align: center;
     }
 
     .flow-header h2 {
-      font-size: clamp(43px, 5vw, 68px);
+      font-size: clamp(43px, 5vw, 70px);
+
       line-height: 1;
+
       margin-bottom: 22px;
     }
 
     .flow-header p {
       color: var(--muted);
+
       font-size: 17px;
     }
 
     .flow-demo {
-      margin-top: 80px;
       position: relative;
+
+      margin-top: 75px;
     }
 
     .flow-line {
       position: absolute;
+
+      top: 35px;
+
       left: 10%;
       right: 10%;
-      top: 35px;
+
       height: 1px;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        var(--gold-dark),
-        var(--gold),
-        var(--gold-dark),
-        transparent
-      );
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          var(--gold-dark),
+          var(--gold),
+          var(--gold-dark),
+          transparent
+        );
+
       opacity: .55;
     }
 
-    .flow-line::after {
-      content: "";
+    .flow-light {
       position: absolute;
+
       top: -2px;
+
       left: 0;
-      width: 100px;
+
+      width: 90px;
       height: 5px;
+
       border-radius: 10px;
+
       background: var(--gold);
+
       filter: blur(4px);
-      animation: flowLight 4s linear infinite;
+
+      animation:
+        flowLight 4s linear infinite;
     }
 
     .flow-steps {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+
+      grid-template-columns:
+        repeat(5, 1fr);
+
       gap: 18px;
+
       position: relative;
+
       z-index: 2;
     }
 
@@ -771,201 +1178,384 @@
     .flow-number {
       width: 70px;
       height: 70px;
-      border-radius: 50%;
+
       margin: auto;
+
       display: grid;
       place-items: center;
+
+      border-radius: 50%;
+
       background: #111b26;
-      border: 1px solid #263749;
+
+      border:
+        1px solid #263749;
+
       color: var(--gold);
+
       font-size: 13px;
       font-weight: 800;
-      box-shadow: 0 0 0 7px var(--bg);
-      transition: .35s ease;
+
+      box-shadow:
+        0 0 0 7px var(--bg);
+
+      transition:
+        .4s var(--ease);
     }
 
-    .flow-step:hover .flow-number {
-      transform: translateY(-5px);
+    .flow-step.active .flow-number {
+      transform: translateY(-7px);
+
       border-color: var(--gold);
+
       box-shadow:
         0 0 0 7px var(--bg),
-        0 0 35px rgba(251,189,50,.16);
+        0 0 35px rgba(245,184,46,.18);
     }
 
     .flow-step h3 {
       font-size: 14px;
+
       margin-top: 22px;
+
       margin-bottom: 7px;
     }
 
     .flow-step p {
       color: var(--muted);
+
       font-size: 11px;
+
       line-height: 1.6;
     }
 
-    /* =========================
-       INTERACTIVE CAPTURE DEMO
-    ========================= */
+    /* =========================================
+       LIVE TRANSACTION JOURNEY
+    ========================================= */
 
-    .capture-demo {
-      margin-top: 95px;
+    .journey {
+      margin-top: 90px;
+
       display: grid;
-      grid-template-columns: 1fr 1fr;
+
+      grid-template-columns:
+        1fr 1.1fr;
+
       gap: 70px;
+
       align-items: center;
     }
 
-    .demo-window {
-      background: #101923;
-      border: 1px solid #263748;
-      border-radius: 24px;
-      padding: 14px;
-      box-shadow: 0 35px 100px rgba(0,0,0,.25);
+    .journey-copy h2 {
+      font-size: clamp(42px, 4.5vw, 62px);
+
+      line-height: 1.02;
+
+      margin-bottom: 24px;
     }
 
-    .demo-top {
-      display: flex;
-      justify-content: space-between;
-      padding: 12px 10px 18px;
+    .journey-copy p {
       color: var(--muted);
+
+      font-size: 17px;
+
+      line-height: 1.85;
+
+      margin-bottom: 25px;
+    }
+
+    .journey-stage {
+      min-height: 390px;
+
+      padding: 18px;
+
+      border:
+        1px solid #263748;
+
+      border-radius: 24px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #121d28,
+          #0c141d
+        );
+
+      box-shadow:
+        0 35px 90px rgba(0,0,0,.24);
+
+      position: relative;
+
+      overflow: hidden;
+    }
+
+    .journey-stage::before {
+      content: "";
+
+      position: absolute;
+
+      width: 280px;
+      height: 280px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(245,184,46,.035);
+
+      filter: blur(50px);
+
+      top: -130px;
+      right: -100px;
+    }
+
+    .journey-top {
+      display: flex;
+
+      justify-content: space-between;
+
+      padding: 10px 8px 18px;
+
+      border-bottom:
+        1px solid rgba(255,255,255,.06);
+
+      color: var(--muted);
+
       font-size: 11px;
       font-weight: 700;
     }
 
-    .demo-state {
+    .journey-status {
       color: var(--gold);
+
       font-size: 9px;
+
       letter-spacing: .1em;
     }
 
-    .review-card {
-      background: #0c151e;
-      border: 1px solid rgba(255,255,255,.05);
-      border-radius: 18px;
-      padding: 25px;
+    .journey-area {
       position: relative;
-      overflow: hidden;
+
+      height: 315px;
     }
 
-    .review-badge {
-      display: inline-block;
-      padding: 6px 9px;
-      border-radius: 7px;
-      background: rgba(251,189,50,.09);
+    .journey-card {
+      position: absolute;
+
+      width: 270px;
+
+      left: 50%;
+      top: 50%;
+
+      transform:
+        translate(-50%,-50%);
+
+      padding: 22px;
+
+      border:
+        1px solid #2a3d50;
+
+      border-radius: 17px;
+
+      background:
+        #0d1721;
+
+      box-shadow:
+        0 20px 50px rgba(0,0,0,.25);
+
+      transition:
+        opacity .45s ease,
+        transform .65s var(--ease);
+    }
+
+    .journey-card.hidden {
+      opacity: 0;
+
+      transform:
+        translate(-50%,-40%)
+        scale(.94);
+    }
+
+    .journey-card.show {
+      opacity: 1;
+
+      transform:
+        translate(-50%,-50%)
+        scale(1);
+    }
+
+    .journey-icon {
+      width: 38px;
+      height: 38px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 11px;
+
+      background: var(--gold-soft);
+
       color: var(--gold);
-      font-size: 8px;
-      font-weight: 800;
-      margin-bottom: 20px;
+
+      margin-bottom: 15px;
     }
 
-    .review-title {
-      font-size: 18px;
-      font-weight: 800;
-      margin-bottom: 20px;
+    .journey-card h3 {
+      font-size: 15px;
+
+      margin-bottom: 5px;
     }
 
-    .review-row {
+    .journey-card p {
+      color: var(--muted);
+
+      font-size: 10px;
+
+      line-height: 1.6;
+
+      margin-bottom: 16px;
+    }
+
+    .journey-meta {
       display: flex;
       justify-content: space-between;
-      padding: 14px 0;
-      border-top: 1px solid rgba(255,255,255,.055);
-      color: var(--muted);
-      font-size: 11px;
+
+      padding-top: 13px;
+
+      border-top:
+        1px solid rgba(255,255,255,.055);
+
+      color: var(--muted-2);
+
+      font-size: 10px;
     }
 
-    .review-row strong {
+    .journey-meta strong {
       color: var(--text);
     }
 
-    .review-buttons {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 22px;
-    }
+    .journey-confirm {
+      margin-top: 15px;
 
-    .review-button {
-      height: 44px;
-      border-radius: 10px;
-      border: 1px solid #26384a;
-      background: transparent;
-      color: var(--text);
-      font-size: 11px;
-      font-weight: 700;
-    }
+      width: 100%;
+      height: 40px;
 
-    .review-button.confirm {
+      border: 0;
+
+      border-radius: 9px;
+
       background: var(--gold);
+
       color: #080c13;
-      border-color: var(--gold);
-      position: relative;
-      overflow: hidden;
+
+      font-size: 11px;
+      font-weight: 800;
+
+      cursor: pointer;
     }
 
-    .confirm-shine {
+    .journey-complete {
+      color: var(--green);
+
+      font-size: 10px;
+
+      font-weight: 800;
+    }
+
+    .journey-dots {
       position: absolute;
-      inset: 0;
-      transform: translateX(-120%);
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.4),
-        transparent
-      );
-      animation: buttonShine 3s infinite 1.5s;
+
+      bottom: 13px;
+      left: 50%;
+
+      transform:
+        translateX(-50%);
+
+      display: flex;
+
+      gap: 7px;
     }
 
-    .capture-copy h2 {
-      font-size: clamp(42px, 4.5vw, 62px);
-      line-height: 1.02;
-      margin-bottom: 25px;
+    .journey-dot {
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: #2c3b4b;
+
+      transition: .3s ease;
     }
 
-    .capture-copy p {
-      color: var(--muted);
-      font-size: 17px;
-      line-height: 1.85;
-      margin-bottom: 25px;
+    .journey-dot.active {
+      width: 18px;
+
+      border-radius: 10px;
+
+      background: var(--gold);
     }
 
-    /* =========================
+    /* =========================================
        RECURRING
-    ========================= */
+    ========================================= */
 
     .recurring-card {
-      background: #111b26;
-      border: 1px solid #263748;
-      border-radius: 24px;
       padding: 25px;
+
+      border:
+        1px solid #263748;
+
+      border-radius: 24px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #131e29,
+          #0d151e
+        );
     }
 
     .recurring-head {
       display: flex;
+
       justify-content: space-between;
+
       padding-bottom: 18px;
-      border-bottom: 1px solid rgba(255,255,255,.06);
+
+      border-bottom:
+        1px solid rgba(255,255,255,.06);
+
       font-size: 13px;
       font-weight: 800;
     }
 
     .commitment {
       display: grid;
-      grid-template-columns: 42px 1fr auto;
+
+      grid-template-columns:
+        42px 1fr auto;
+
       gap: 14px;
+
       align-items: center;
+
       padding: 19px 0;
-      border-bottom: 1px solid rgba(255,255,255,.055);
+
+      border-bottom:
+        1px solid rgba(255,255,255,.055);
     }
 
     .commitment-icon {
       width: 42px;
       height: 42px;
-      border-radius: 12px;
+
       display: grid;
       place-items: center;
+
+      border-radius: 12px;
+
+      background: var(--gold-soft);
+
       color: var(--gold);
-      background: rgba(251,189,50,.08);
     }
 
     .commitment-name {
@@ -975,7 +1565,9 @@
 
     .commitment-date {
       color: var(--muted);
+
       font-size: 9px;
+
       margin-top: 4px;
     }
 
@@ -990,176 +1582,731 @@
 
     .commitment-status {
       color: var(--gold);
+
       font-size: 8px;
       font-weight: 800;
+
       margin-top: 5px;
     }
 
-    /* =========================
-       PRIVACY
-    ========================= */
+    /* =========================================
+       BACKUP / CONTROL
+    ========================================= */
 
-    .privacy-center {
+    .control {
+      max-width: 1050px;
+
+      margin: auto;
+
       text-align: center;
-      max-width: 1000px;
-      margin: auto;
     }
 
-    .privacy-center h2 {
+    .control h2 {
       font-size: clamp(43px, 5vw, 70px);
+
       line-height: 1;
-      margin-bottom: 25px;
+
+      margin-bottom: 24px;
     }
 
-    .privacy-center > p {
-      color: var(--muted);
-      font-size: 17px;
+    .control > p {
       max-width: 760px;
+
       margin: auto;
-      line-height: 1.8;
+
+      color: var(--muted);
+
+      font-size: 17px;
+
+      line-height: 1.85;
     }
 
-    .privacy-grid {
+    .control-diagram {
       margin-top: 70px;
+
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 12px;
+
+      grid-template-columns:
+        1fr 110px 1fr;
+
+      align-items: center;
+
+      gap: 20px;
     }
 
-    .privacy-item {
-      min-height: 150px;
-      background: #111b26;
-      border: 1px solid #263748;
-      border-radius: 18px;
-      padding: 25px 15px;
+    .control-node {
+      padding: 35px 25px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 20px;
+
+      background: var(--panel);
+
+      transition:
+        transform .35s var(--ease),
+        border-color .35s ease;
+    }
+
+    .control-node:hover {
+      transform: translateY(-6px);
+
+      border-color:
+        var(--gold-border);
+    }
+
+    .control-node-icon {
+      width: 52px;
+      height: 52px;
+
+      margin: auto;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 15px;
+
+      background: var(--gold-soft);
+
+      color: var(--gold);
+
+      font-size: 21px;
+    }
+
+    .control-node h3 {
+      margin-top: 17px;
+
+      font-size: 14px;
+    }
+
+    .control-node p {
+      margin-top: 7px;
+
+      color: var(--muted);
+
+      font-size: 10px;
+
+      line-height: 1.6;
+    }
+
+    .control-connector {
+      position: relative;
+
+      height: 2px;
+
+      background:
+        linear-gradient(
+          90deg,
+          var(--gold-dark),
+          var(--gold),
+          var(--gold-dark)
+        );
+    }
+
+    .control-connector::after {
+      content: "→";
+
+      position: absolute;
+
+      right: -2px;
+      top: 50%;
+
+      transform:
+        translateY(-50%);
+
+      color: var(--gold);
+
+      font-size: 17px;
+    }
+
+    .control-note {
+      max-width: 750px;
+
+      margin: 35px auto 0;
+
+      padding: 23px;
+
+      border:
+        1px solid var(--green-border);
+
+      border-radius: 17px;
+
+      background:
+        var(--green-soft);
+
+      color: #88b8a8;
+
+      font-size: 12px;
+    }
+
+    .control-note strong {
+      color: var(--text);
+    }
+
+    /* =========================================
+       PRIVACY ARCHITECTURE
+    ========================================= */
+
+    .privacy {
+      text-align: center;
+    }
+
+    .privacy h2 {
+      font-size: clamp(43px, 5vw, 70px);
+
+      line-height: 1;
+
+      margin-bottom: 24px;
+    }
+
+    .privacy-intro {
+      max-width: 760px;
+
+      margin: auto;
+
+      color: var(--muted);
+
+      font-size: 17px;
+
+      line-height: 1.85;
+    }
+
+    .privacy-diagram {
+      max-width: 950px;
+
+      margin: 75px auto 0;
+
+      min-height: 450px;
+
+      position: relative;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+    }
+
+    .privacy-core {
+      width: 180px;
+      height: 180px;
+
+      border-radius: 50%;
+
       display: flex;
       flex-direction: column;
-      justify-content: center;
+
       align-items: center;
-      gap: 15px;
-      transition: transform .3s ease, border-color .3s ease;
+      justify-content: center;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(245,184,46,.13),
+          rgba(245,184,46,.035)
+        );
+
+      border:
+        1px solid var(--gold-border);
+
+      box-shadow:
+        0 0 70px rgba(245,184,46,.08);
+
+      position: relative;
+
+      z-index: 3;
     }
 
-    .privacy-item:hover {
-      transform: translateY(-7px);
-      border-color: rgba(251,189,50,.4);
+    .privacy-core-icon {
+      font-size: 31px;
+
+      margin-bottom: 8px;
     }
 
-    .privacy-icon {
+    .privacy-core strong {
+      font-size: 15px;
+    }
+
+    .privacy-core span {
+      color: var(--muted);
+
+      font-size: 9px;
+
+      margin-top: 3px;
+    }
+
+    .privacy-node {
+      position: absolute;
+
+      width: 180px;
+
+      padding: 20px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 16px;
+
+      background:
+        rgba(17,26,38,.95);
+
+      z-index: 3;
+
+      transition:
+        transform .3s var(--ease),
+        border-color .3s ease;
+    }
+
+    .privacy-node:hover {
+      border-color: var(--gold-border);
+
+      transform: scale(1.03);
+    }
+
+    .privacy-node:nth-child(2) {
+      top: 0;
+      left: 50%;
+
+      transform:
+        translateX(-50%);
+    }
+
+    .privacy-node:nth-child(3) {
+      right: 0;
+      top: 50%;
+
+      transform:
+        translateY(-50%);
+    }
+
+    .privacy-node:nth-child(4) {
+      bottom: 0;
+      left: 50%;
+
+      transform:
+        translateX(-50%);
+    }
+
+    .privacy-node:nth-child(5) {
+      left: 0;
+      top: 50%;
+
+      transform:
+        translateY(-50%);
+    }
+
+    .privacy-node-icon {
       color: var(--gold);
-      font-size: 19px;
+
+      font-size: 18px;
     }
 
-    .privacy-item strong {
+    .privacy-node strong {
+      display: block;
+
+      margin-top: 8px;
+
       font-size: 11px;
     }
 
+    .privacy-node span {
+      display: block;
+
+      margin-top: 4px;
+
+      color: var(--muted);
+
+      font-size: 8px;
+
+      line-height: 1.5;
+    }
+
+    .privacy-line {
+      position: absolute;
+
+      width: 250px;
+      height: 1px;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          var(--gold-dark),
+          transparent
+        );
+
+      z-index: 1;
+    }
+
+    .privacy-line-1 {
+      transform:
+        rotate(90deg);
+
+      top: 105px;
+    }
+
+    .privacy-line-2 {
+      transform:
+        rotate(0deg);
+
+      right: 130px;
+    }
+
+    .privacy-line-3 {
+      transform:
+        rotate(90deg);
+
+      bottom: 105px;
+    }
+
+    .privacy-line-4 {
+      left: 130px;
+    }
+
     .privacy-message {
-      margin: 35px auto 0;
-      max-width: 780px;
-      padding: 28px;
-      border: 1px solid rgba(16,201,139,.3);
+      max-width: 800px;
+
+      margin: 40px auto 0;
+
+      padding: 27px;
+
+      border:
+        1px solid var(--green-border);
+
       border-radius: 18px;
-      background: rgba(16,201,139,.055);
+
+      background:
+        var(--green-soft);
     }
 
     .privacy-message strong {
       display: block;
+
       font-size: 14px;
+
       margin-bottom: 7px;
     }
 
     .privacy-message p {
-      color: #83b9a9;
+      color: #83b5a6;
+
       font-size: 12px;
     }
 
-    /* =========================
+    /* =========================================
+       PRODUCT PREVIEW
+    ========================================= */
+
+    .preview {
+      text-align: center;
+    }
+
+    .preview h2 {
+      font-size: clamp(43px, 5vw, 70px);
+
+      line-height: 1;
+
+      margin-bottom: 24px;
+    }
+
+    .preview-intro {
+      max-width: 760px;
+
+      margin: auto;
+
+      color: var(--muted);
+
+      font-size: 17px;
+    }
+
+    .preview-tabs {
+      display: flex;
+
+      justify-content: center;
+
+      gap: 8px;
+
+      margin-top: 50px;
+    }
+
+    .preview-tab {
+      padding: 10px 16px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 999px;
+
+      background: transparent;
+
+      color: var(--muted);
+
+      font-size: 11px;
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition:
+        .3s ease;
+    }
+
+    .preview-tab.active {
+      border-color: var(--gold-border);
+
+      background:
+        var(--gold-soft);
+
+      color: var(--gold);
+    }
+
+    .preview-window {
+      max-width: 850px;
+
+      min-height: 450px;
+
+      margin: 30px auto 0;
+
+      padding: 25px;
+
+      border:
+        1px solid #263748;
+
+      border-radius: 25px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #131e29,
+          #0d151e
+        );
+
+      text-align: left;
+
+      position: relative;
+
+      overflow: hidden;
+    }
+
+    .preview-screen {
+      display: none;
+    }
+
+    .preview-screen.active {
+      display: block;
+
+      animation:
+        screenIn .5s var(--ease);
+    }
+
+    .preview-screen-title {
+      display: flex;
+
+      justify-content: space-between;
+
+      padding-bottom: 18px;
+
+      border-bottom:
+        1px solid rgba(255,255,255,.06);
+
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .preview-screen-content {
+      padding-top: 25px;
+    }
+
+    .preview-big-number {
+      font-size: 43px;
+
+      font-weight: 850;
+
+      letter-spacing: -.05em;
+    }
+
+    .preview-small {
+      color: var(--muted);
+
+      font-size: 10px;
+
+      margin-top: 4px;
+    }
+
+    .preview-list {
+      margin-top: 25px;
+    }
+
+    .preview-list-row {
+      display: flex;
+
+      align-items: center;
+
+      gap: 13px;
+
+      padding: 16px 0;
+
+      border-bottom:
+        1px solid rgba(255,255,255,.055);
+    }
+
+    .preview-list-icon {
+      width: 40px;
+      height: 40px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 11px;
+
+      background: #172433;
+
+      color: var(--gold);
+    }
+
+    .preview-list-info {
+      flex: 1;
+    }
+
+    .preview-list-info strong {
+      font-size: 12px;
+    }
+
+    .preview-list-info span {
+      display: block;
+
+      color: var(--muted-2);
+
+      font-size: 9px;
+    }
+
+    .preview-list-value {
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    /* =========================================
        FINAL CTA
-    ========================= */
+    ========================================= */
 
     .final {
-      min-height: 650px;
+      min-height: 670px;
+
       display: flex;
+
       align-items: center;
+
       text-align: center;
+
       position: relative;
+
       overflow: hidden;
     }
 
     .final::before {
       content: "";
+
       position: absolute;
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
+
+      width: 550px;
+      height: 550px;
+
       left: 50%;
       top: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(251,189,50,.035);
-      filter: blur(70px);
+
+      transform:
+        translate(-50%,-50%);
+
+      border-radius: 50%;
+
+      background:
+        rgba(245,184,46,.035);
+
+      filter: blur(75px);
+
       pointer-events: none;
     }
 
     .final-content {
       position: relative;
+
       z-index: 2;
+
       width: 100%;
     }
 
     .final-logo {
-      width: 70px;
-      height: 70px;
+      width: 72px;
+      height: 72px;
+
       object-fit: contain;
+
       margin-bottom: 35px;
-      animation: logoFloat 4s ease-in-out infinite;
+
+      animation:
+        logoFloat 4s ease-in-out infinite;
     }
 
     .final h2 {
       max-width: 900px;
+
       margin: auto;
-      font-size: clamp(45px, 6vw, 82px);
+
+      font-size: clamp(46px, 6vw, 82px);
+
       line-height: .98;
     }
 
     .final p {
-      max-width: 680px;
-      margin: 28px auto 35px;
+      max-width: 690px;
+
+      margin: 27px auto 34px;
+
       color: var(--muted);
+
       font-size: 17px;
     }
 
-    /* =========================
+    /* =========================================
        FOOTER
-    ========================= */
+    ========================================= */
 
     footer {
-      border-top: 1px solid rgba(255,255,255,.06);
+      border-top:
+        1px solid rgba(255,255,255,.06);
+
       padding: 35px 0;
     }
 
     .footer-inner {
       display: flex;
+
       justify-content: space-between;
+
       color: var(--muted-2);
+
       font-size: 12px;
     }
 
-    /* =========================
-       SCROLL REVEAL
-    ========================= */
+    /* =========================================
+       REVEAL
+    ========================================= */
 
     .reveal {
       opacity: 0;
-      transform: translateY(35px);
+
+      transform:
+        translateY(35px);
+
       transition:
-        opacity .8s ease,
-        transform .8s cubic-bezier(.2,.8,.2,1);
+        opacity .85s var(--ease),
+        transform .85s var(--ease);
     }
 
     .reveal.visible {
       opacity: 1;
-      transform: translateY(0);
+
+      transform:
+        translateY(0);
     }
 
     .delay-1 {
@@ -1174,54 +2321,87 @@
       transition-delay: .3s;
     }
 
-    /* =========================
-       ANIMATIONS
-    ========================= */
+    /* =========================================
+       KEYFRAMES
+    ========================================= */
 
     @keyframes pulse {
       0%,100% {
         opacity: 1;
         transform: scale(1);
       }
+
       50% {
-        opacity: .5;
+        opacity: .45;
         transform: scale(.75);
       }
     }
 
     @keyframes phoneFloat {
       0%,100% {
-        transform: rotateY(-7deg) rotateX(2deg) translateY(0);
+        transform:
+          rotateY(-7deg)
+          rotateX(2deg)
+          translateY(0);
       }
+
       50% {
-        transform: rotateY(-5deg) rotateX(1deg) translateY(-12px);
+        transform:
+          rotateY(-5deg)
+          rotateX(1deg)
+          translateY(-12px);
       }
     }
 
     @keyframes floatLeft {
       0%,100% {
-        transform: translate(0,0) rotate(-1deg);
+        transform:
+          translate(0,0)
+          rotate(-1deg);
       }
+
       50% {
-        transform: translate(-9px,-12px) rotate(1deg);
+        transform:
+          translate(-9px,-12px)
+          rotate(1deg);
       }
     }
 
     @keyframes floatRight {
       0%,100% {
-        transform: translate(0,0) rotate(1deg);
+        transform:
+          translate(0,0)
+          rotate(1deg);
       }
+
       50% {
-        transform: translate(8px,-10px) rotate(-1deg);
+        transform:
+          translate(8px,-10px)
+          rotate(-1deg);
+      }
+    }
+
+    @keyframes glowPulse {
+      0%,100% {
+        transform: scale(.95);
+        opacity: .6;
+      }
+
+      50% {
+        transform: scale(1.08);
+        opacity: 1;
       }
     }
 
     @keyframes lockPulse {
       0%,100% {
-        box-shadow: 0 0 0 rgba(251,189,50,0);
+        box-shadow:
+          0 0 0 rgba(245,184,46,0);
       }
+
       50% {
-        box-shadow: 0 0 18px rgba(251,189,50,.16);
+        box-shadow:
+          0 0 18px rgba(245,184,46,.17);
       }
     }
 
@@ -1234,49 +2414,65 @@
     @keyframes transactionIn {
       from {
         opacity: 0;
-        transform: translateX(15px);
+        transform:
+          translateX(15px);
       }
+
       to {
         opacity: 1;
-        transform: translateX(0);
+        transform:
+          translateX(0);
       }
     }
 
     @keyframes flowLight {
       from {
-        transform: translateX(0);
+        transform:
+          translateX(0);
       }
+
       to {
-        transform: translateX(calc(100% - 100px));
+        transform:
+          translateX(calc(100% - 90px));
       }
     }
 
-    @keyframes buttonShine {
-      0%,55% {
-        transform: translateX(-120%);
+    @keyframes screenIn {
+      from {
+        opacity: 0;
+        transform:
+          translateY(12px);
       }
-      75%,100% {
-        transform: translateX(120%);
+
+      to {
+        opacity: 1;
+        transform:
+          translateY(0);
       }
     }
 
     @keyframes logoFloat {
       0%,100% {
-        transform: translateY(0);
+        transform:
+          translateY(0);
       }
+
       50% {
-        transform: translateY(-8px);
+        transform:
+          translateY(-8px);
       }
     }
 
-    /* =========================
+    /* =========================================
        RESPONSIVE
-    ========================= */
+    ========================================= */
 
-    @media (max-width: 1000px) {
+    @media (max-width: 1050px) {
+
       .hero-grid,
       .split,
-      .capture-demo {
+      .split.reverse,
+      .journey {
         grid-template-columns: 1fr;
       }
 
@@ -1294,13 +2490,24 @@
       }
 
       .hero-visual {
-        height: 620px;
+        height: 630px;
+      }
+
+      .privacy-card {
+        left: 5%;
+      }
+
+      .upcoming-card {
+        right: 5%;
       }
 
       .flow-steps {
-        grid-template-columns: repeat(5, minmax(130px, 1fr));
+        grid-template-columns:
+          repeat(5, minmax(135px,1fr));
+
         overflow-x: auto;
-        padding-bottom: 15px;
+
+        padding-bottom: 12px;
       }
 
       .flow-line {
@@ -1308,17 +2515,23 @@
       }
 
       .privacy-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns:
+          repeat(3,1fr);
       }
 
-      .split {
-        gap: 50px;
+      .privacy-diagram {
+        transform: scale(.9);
       }
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 720px) {
+
       .container {
-        width: min(100% - 28px, var(--max));
+        width:
+          min(
+            calc(100% - 28px),
+            var(--max)
+          );
       }
 
       .section {
@@ -1330,8 +2543,8 @@
       }
 
       .brand img {
-        width: 38px;
-        height: 38px;
+        width: 39px;
+        height: 39px;
       }
 
       .nav-right {
@@ -1340,6 +2553,7 @@
 
       .hero {
         min-height: auto;
+
         padding-top: 120px;
         padding-bottom: 80px;
       }
@@ -1354,8 +2568,12 @@
 
       .hero-visual {
         height: 570px;
+
         transform: scale(.88);
-        margin: -20px 0 -30px;
+
+        margin:
+          -15px 0
+          -25px;
       }
 
       .privacy-card {
@@ -1366,65 +2584,123 @@
         right: -5px;
       }
 
+      .not-bank-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .control-diagram {
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+      }
+
+      .control-connector {
+        width: 2px;
+        height: 50px;
+
+        margin: auto;
+      }
+
+      .control-connector::after {
+        content: "↓";
+
+        right: auto;
+        top: auto;
+        bottom: -8px;
+        left: 50%;
+
+        transform:
+          translateX(-50%);
+      }
+
+      .privacy-diagram {
+        min-height: 520px;
+
+        transform: scale(.75);
+        margin-top: 30px;
+        margin-bottom: -80px;
+      }
+
       .privacy-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns:
+          1fr 1fr;
       }
 
-      .privacy-item:last-child {
-        grid-column: span 2;
-      }
-
-      .capture-demo {
-        gap: 40px;
+      .journey {
+        gap: 45px;
       }
 
       .footer-inner {
         flex-direction: column;
-        gap: 10px;
-        text-align: center;
-      }
 
-      .final {
-        min-height: 550px;
+        gap: 9px;
+
+        text-align: center;
       }
     }
 
-    @media (max-width: 450px) {
+    @media (max-width: 470px) {
+
       .hero h1 {
         font-size: 49px;
       }
 
       .hero-visual {
         transform: scale(.72);
-        height: 490px;
-        margin: -20px -40px;
+
+        height: 500px;
+
+        margin:
+          -20px -35px;
       }
 
       .privacy-grid {
         grid-template-columns: 1fr;
       }
 
-      .privacy-item:last-child {
-        grid-column: auto;
+      .privacy-diagram {
+        transform: scale(.61);
+
+        margin-top: -15px;
+        margin-bottom: -150px;
       }
 
       .cta {
         width: 100%;
-        justify-content: center;
       }
 
-      .review-buttons {
-        grid-template-columns: 1fr;
+      .journey-stage {
+        min-height: 360px;
+      }
+
+      .journey-card {
+        width: 240px;
+      }
+
+      .preview-tabs {
+        flex-wrap: wrap;
+      }
+
+      .preview-tab {
+        flex: 1 1 30%;
+      }
+
+      .preview-window {
+        padding: 18px;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
+
+      html {
+        scroll-behavior: auto;
+      }
+
       *,
       *::before,
       *::after {
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
         transition-duration: .01ms !important;
       }
 
@@ -1438,12 +2714,13 @@
 
 <body>
 
-  <!-- =========================
-       HEADER
-  ========================== -->
+  <!-- =====================================
+       NAVIGATION
+  ====================================== -->
 
   <header>
     <div class="container nav">
+
       <a href="#" class="brand">
         <img src="logo.png" alt="Peti logo">
         <span>Peti</span>
@@ -1452,17 +2729,24 @@
       <div class="nav-right">
         Private Money Ledger
       </div>
+
     </div>
   </header>
 
 
-  <!-- =========================
-       HERO
-  ========================== -->
+  <!-- =====================================
+       MAIN
+  ====================================== -->
 
   <main>
 
+
+    <!-- =====================================
+         HERO
+    ====================================== -->
+
     <section class="hero">
+
       <div class="container hero-grid">
 
         <div class="hero-copy">
@@ -1480,8 +2764,8 @@
           <p class="hero-description">
             Peti is a local-first personal finance ledger designed to keep
             your financial records <strong>encrypted on your device</strong>,
-            with your data under your control — not dependent on a cloud
-            financial account.
+            with your data under your control — without making your financial
+            ledger dependent on a remote account.
           </p>
 
           <p class="hero-subline">
@@ -1500,13 +2784,25 @@
 
         <div class="hero-visual">
 
+          <div class="phone-glow"></div>
+
+
           <div class="floating-card privacy-card">
-            <div class="floating-label">Privacy</div>
-            <div class="floating-title">🔐 Encrypted locally</div>
+
+            <div class="floating-label">
+              Privacy
+            </div>
+
+            <div class="floating-title">
+              🔐 Encrypted locally
+            </div>
+
             <div class="floating-text">
               Your ledger stays on your device.
             </div>
+
           </div>
+
 
           <div class="phone">
 
@@ -1515,8 +2811,15 @@
               <div class="dynamic-island"></div>
 
               <div class="phone-top">
-                <div class="phone-title">Peti</div>
-                <div class="lock">🔐</div>
+
+                <div class="phone-title">
+                  Peti
+                </div>
+
+                <div class="lock">
+                  🔐
+                </div>
+
               </div>
 
               <div class="balance-label">
@@ -1531,29 +2834,55 @@
                 ↑ 8.4% this month
               </div>
 
+
               <div class="chart">
+
                 <svg viewBox="0 0 280 60">
+
                   <path
                     class="chart-path"
-                    d="M5 48 L30 44 L55 47 L78 36 L100 40 L124 30 L147 35 L170 25 L195 31 L220 19 L248 23 L275 17"
+                    d="
+                      M5 48
+                      L30 44
+                      L55 47
+                      L78 36
+                      L100 40
+                      L124 30
+                      L147 35
+                      L170 25
+                      L195 31
+                      L220 19
+                      L248 23
+                      L275 17
+                    "
                   />
+
                 </svg>
+
               </div>
 
+
               <div class="activity-title">
-                <span style="color:var(--text);">
+
+                <span>
                   Recent activity
                 </span>
 
                 <span>
                   View all
                 </span>
+
               </div>
 
+
               <div class="transaction">
-                <div class="transaction-icon">F</div>
+
+                <div class="transaction-icon">
+                  F
+                </div>
 
                 <div class="transaction-info">
+
                   <div class="transaction-name">
                     Food & Dining
                   </div>
@@ -1561,17 +2890,24 @@
                   <div class="transaction-date">
                     Today · 12:42 PM
                   </div>
+
                 </div>
 
                 <div class="transaction-value">
                   − ₹420
                 </div>
+
               </div>
 
+
               <div class="transaction">
-                <div class="transaction-icon">T</div>
+
+                <div class="transaction-icon">
+                  T
+                </div>
 
                 <div class="transaction-info">
+
                   <div class="transaction-name">
                     Transport
                   </div>
@@ -1579,17 +2915,24 @@
                   <div class="transaction-date">
                     Today · 09:18 AM
                   </div>
+
                 </div>
 
                 <div class="transaction-value">
                   − ₹180
                 </div>
+
               </div>
 
+
               <div class="transaction">
-                <div class="transaction-icon">+</div>
+
+                <div class="transaction-icon">
+                  +
+                </div>
 
                 <div class="transaction-info">
+
                   <div class="transaction-name">
                     Income
                   </div>
@@ -1597,6 +2940,7 @@
                   <div class="transaction-date">
                     Yesterday
                   </div>
+
                 </div>
 
                 <div
@@ -1605,12 +2949,18 @@
                 >
                   + ₹4,500
                 </div>
+
               </div>
 
+
               <div class="transaction">
-                <div class="transaction-icon">H</div>
+
+                <div class="transaction-icon">
+                  H
+                </div>
 
                 <div class="transaction-info">
+
                   <div class="transaction-name">
                     Household
                   </div>
@@ -1618,18 +2968,25 @@
                   <div class="transaction-date">
                     Yesterday
                   </div>
+
                 </div>
 
                 <div class="transaction-value">
                   − ₹860
                 </div>
+
               </div>
 
             </div>
+
           </div>
 
+
           <div class="floating-card upcoming-card">
-            <div class="floating-label">Upcoming</div>
+
+            <div class="floating-label">
+              Upcoming
+            </div>
 
             <div class="floating-title">
               Subscription · ₹499
@@ -1638,18 +2995,22 @@
             <div class="floating-text">
               Due in 3 days
             </div>
+
           </div>
 
         </div>
+
       </div>
+
     </section>
 
 
-    <!-- =========================
-         DIFFERENT APPROACH
-    ========================== -->
+    <!-- =====================================
+         INTRO
+    ====================================== -->
 
     <section class="section">
+
       <div class="container">
 
         <div class="intro reveal">
@@ -1664,29 +3025,37 @@
           </h2>
 
           <p>
-            Peti isn't built around making you another user in a remote
-            financial database. It is built around giving you a private
-            place to maintain, review, and understand your own financial
-            records.
+            Peti is built around a simple idea:
+            your personal financial records should remain under your control.
+            You should be able to record, review, understand, back up,
+            and export your own ledger without making a remote account
+            the center of the experience.
           </p>
 
-          <div class="highlight-box">
-            <strong>Local-first does not mean fragile.</strong>
-            Your ledger is kept on your device, with protection, backup,
-            and export designed around keeping you in control of your own data.
+          <div class="highlight">
+
+            <strong>
+              Local-first does not mean fragile.
+            </strong>
+
+            Your ledger stays on your device while backup and export
+            give you ways to keep another copy under your own control.
+
           </div>
 
         </div>
 
       </div>
+
     </section>
 
 
-    <!-- =========================
+    <!-- =====================================
          LEDGER
-    ========================== -->
+    ====================================== -->
 
     <section class="section">
+
       <div class="container split">
 
         <div class="reveal">
@@ -1701,8 +3070,8 @@
           </h2>
 
           <p>
-            Peti stores your confirmed financial records locally in an
-            encrypted database on your device. The ledger doesn't need
+            Peti stores confirmed financial records locally in an
+            encrypted database on your device. The ledger does not need
             to live on a Peti server for you to use it.
           </p>
 
@@ -1720,7 +3089,7 @@
 
             <div class="check">
               <span class="check-icon">✓</span>
-              Designed without a remote financial ledger
+              No remote financial ledger required
             </div>
 
           </div>
@@ -1731,9 +3100,17 @@
         <div class="ledger-card reveal delay-2">
 
           <div class="ledger-header">
-            <strong>My Ledger</strong>
-            <span class="local-tag">LOCAL</span>
+
+            <strong>
+              My Ledger
+            </strong>
+
+            <span class="local-tag">
+              LOCAL
+            </span>
+
           </div>
+
 
           <div class="ledger-balance">
 
@@ -1751,11 +3128,15 @@
 
           </div>
 
+
           <div class="ledger-row">
 
-            <div class="ledger-row-icon">F</div>
+            <div class="ledger-row-icon">
+              F
+            </div>
 
             <div class="ledger-row-info">
+
               <div class="ledger-row-name">
                 Food & Dining
               </div>
@@ -1763,6 +3144,7 @@
               <div class="ledger-row-date">
                 27 Sep · Confirmed
               </div>
+
             </div>
 
             <div class="ledger-row-value">
@@ -1771,11 +3153,15 @@
 
           </div>
 
+
           <div class="ledger-row">
 
-            <div class="ledger-row-icon">T</div>
+            <div class="ledger-row-icon">
+              T
+            </div>
 
             <div class="ledger-row-info">
+
               <div class="ledger-row-name">
                 Transport
               </div>
@@ -1783,6 +3169,7 @@
               <div class="ledger-row-date">
                 27 Sep · Confirmed
               </div>
+
             </div>
 
             <div class="ledger-row-value">
@@ -1791,11 +3178,15 @@
 
           </div>
 
+
           <div class="ledger-row">
 
-            <div class="ledger-row-icon">+</div>
+            <div class="ledger-row-icon">
+              +
+            </div>
 
             <div class="ledger-row-info">
+
               <div class="ledger-row-name">
                 Income
               </div>
@@ -1803,6 +3194,7 @@
               <div class="ledger-row-date">
                 26 Sep · Confirmed
               </div>
+
             </div>
 
             <div
@@ -1814,11 +3206,15 @@
 
           </div>
 
+
           <div class="ledger-row">
 
-            <div class="ledger-row-icon">H</div>
+            <div class="ledger-row-icon">
+              H
+            </div>
 
             <div class="ledger-row-info">
+
               <div class="ledger-row-name">
                 Household
               </div>
@@ -1826,6 +3222,7 @@
               <div class="ledger-row-date">
                 26 Sep · Confirmed
               </div>
+
             </div>
 
             <div class="ledger-row-value">
@@ -1837,12 +3234,107 @@
         </div>
 
       </div>
+
     </section>
 
 
-    <!-- =========================
-         PETI MODEL
-    ========================== -->
+    <!-- =====================================
+         NOT YOUR BANK
+    ====================================== -->
+
+    <section class="section">
+
+      <div class="container">
+
+        <div class="not-bank reveal">
+
+          <div class="eyebrow">
+            Clear product boundaries
+          </div>
+
+          <h2>
+            Peti is your ledger.
+            Not your bank.
+          </h2>
+
+          <p>
+            Your bank remains responsible for your bank accounts and
+            banking services. Peti gives you a private place to record,
+            review, and understand your financial information.
+          </p>
+
+
+          <div class="not-bank-grid">
+
+            <div class="not-bank-card">
+
+              <h3>
+                What Peti does not require
+              </h3>
+
+              <ul>
+
+                <li>
+                  A Peti financial account
+                </li>
+
+                <li>
+                  A remote financial database
+                </li>
+
+                <li>
+                  Bank credentials
+                </li>
+
+                <li>
+                  Your financial ledger living on a Peti server
+                </li>
+
+              </ul>
+
+            </div>
+
+
+            <div class="not-bank-card">
+
+              <h3>
+                What you keep
+              </h3>
+
+              <ul>
+
+                <li>
+                  Your local ledger
+                </li>
+
+                <li>
+                  Your app protection
+                </li>
+
+                <li>
+                  Your backups
+                </li>
+
+                <li>
+                  Your exported records
+                </li>
+
+              </ul>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================
+         CAPTURE FLOW
+    ====================================== -->
 
     <section class="section">
 
@@ -1859,8 +3351,8 @@
           </h2>
 
           <p>
-            Peti keeps the boundary between captured information
-            and confirmed financial records clear.
+            Information can be captured without immediately becoming
+            a permanent financial record.
           </p>
 
         </div>
@@ -1868,38 +3360,51 @@
 
         <div class="flow-demo reveal">
 
-          <div class="flow-line"></div>
+          <div class="flow-line">
+            <div class="flow-light"></div>
+          </div>
+
 
           <div class="flow-steps">
 
-            <div class="flow-step">
+            <div class="flow-step active">
               <div class="flow-number">01</div>
               <h3>Capture</h3>
-              <p>Find relevant financial information.</p>
+              <p>
+                Find relevant information.
+              </p>
             </div>
 
             <div class="flow-step">
               <div class="flow-number">02</div>
               <h3>Draft</h3>
-              <p>Prepare it for your review.</p>
+              <p>
+                Prepare it for review.
+              </p>
             </div>
 
             <div class="flow-step">
               <div class="flow-number">03</div>
               <h3>Confirm</h3>
-              <p>Decide what becomes a record.</p>
+              <p>
+                Decide what becomes a record.
+              </p>
             </div>
 
             <div class="flow-step">
               <div class="flow-number">04</div>
               <h3>Ledger</h3>
-              <p>Keep the confirmed record locally.</p>
+              <p>
+                Keep the record locally.
+              </p>
             </div>
 
             <div class="flow-step">
               <div class="flow-number">05</div>
               <h3>Understand</h3>
-              <p>Turn your records into insight.</p>
+              <p>
+                Learn from your records.
+              </p>
             </div>
 
           </div>
@@ -1907,58 +3412,42 @@
         </div>
 
 
-        <!-- CAPTURE DEMO -->
+        <!-- LIVE JOURNEY -->
 
-        <div class="capture-demo">
+        <div class="journey">
 
-          <div class="demo-window reveal">
+          <div class="journey-copy reveal">
 
-            <div class="demo-top">
-              <span>Transaction review</span>
-              <span class="demo-state">DRAFT</span>
+            <div class="eyebrow">
+              See the idea in action
             </div>
 
-            <div class="review-card">
+            <h2>
+              A transaction should earn its place in your ledger.
+            </h2>
 
-              <div class="review-badge">
-                REVIEW BEFORE RECORDING
+            <p>
+              Peti is designed around a clear boundary:
+              captured information can become a draft first.
+              You review it, make corrections if needed, and decide
+              when it becomes part of your confirmed ledger.
+            </p>
+
+            <div class="checks">
+
+              <div class="check">
+                <span class="check-icon">✓</span>
+                Capture information
               </div>
 
-              <div class="review-title">
-                Grocery purchase
+              <div class="check">
+                <span class="check-icon">✓</span>
+                Review the draft
               </div>
 
-              <div class="review-row">
-                <span>Amount</span>
-                <strong>₹1,240</strong>
-              </div>
-
-              <div class="review-row">
-                <span>Category</span>
-                <strong>Groceries</strong>
-              </div>
-
-              <div class="review-row">
-                <span>Date</span>
-                <strong>27 Sep 2026</strong>
-              </div>
-
-              <div class="review-row">
-                <span>Source</span>
-                <strong>Captured information</strong>
-              </div>
-
-              <div class="review-buttons">
-
-                <button class="review-button">
-                  Review / Edit
-                </button>
-
-                <button class="review-button confirm">
-                  <span class="confirm-shine"></span>
-                  Confirm
-                </button>
-
+              <div class="check">
+                <span class="check-icon">✓</span>
+                Confirm before recording
               </div>
 
             </div>
@@ -1966,39 +3455,198 @@
           </div>
 
 
-          <div class="capture-copy reveal delay-2">
+          <div class="journey-stage reveal delay-2">
 
-            <div class="eyebrow">
-              Draft-first capture
+            <div class="journey-top">
+
+              <span>
+                Peti workflow
+              </span>
+
+              <span
+                class="journey-status"
+                id="journeyStatus"
+              >
+                CAPTURE
+              </span>
+
             </div>
 
-            <h2>
-              Information first.
-              Your approval second.
-            </h2>
 
-            <p>
-              Peti separates finding transaction information from
-              permanently recording it. Captured information can become
-              a draft for you to review before it enters your ledger.
-            </p>
+            <div class="journey-area">
 
-            <div class="checks">
+              <!-- CAPTURE -->
 
-              <div class="check">
-                <span class="check-icon">✓</span>
-                Review transaction details before recording
+              <div
+                class="journey-card show"
+                data-stage="0"
+              >
+
+                <div class="journey-icon">
+                  ◉
+                </div>
+
+                <h3>
+                  Payment information captured
+                </h3>
+
+                <p>
+                  Peti found information that may represent
+                  a financial transaction.
+                </p>
+
+                <div class="journey-meta">
+                  <span>
+                    Merchant
+                  </span>
+
+                  <strong>
+                    Grocery Store
+                  </strong>
+                </div>
+
               </div>
 
-              <div class="check">
-                <span class="check-icon">✓</span>
-                Correct information when necessary
+
+              <!-- DRAFT -->
+
+              <div
+                class="journey-card hidden"
+                data-stage="1"
+              >
+
+                <div class="journey-icon">
+                  ✎
+                </div>
+
+                <h3>
+                  Draft created
+                </h3>
+
+                <p>
+                  The information is prepared for your review.
+                </p>
+
+                <div class="journey-meta">
+                  <span>
+                    Amount
+                  </span>
+
+                  <strong>
+                    ₹1,240
+                  </strong>
+                </div>
+
               </div>
 
-              <div class="check">
-                <span class="check-icon">✓</span>
-                You remain the final authority over your ledger
+
+              <!-- CONFIRM -->
+
+              <div
+                class="journey-card hidden"
+                data-stage="2"
+              >
+
+                <div class="journey-icon">
+                  ✓
+                </div>
+
+                <h3>
+                  Review before recording
+                </h3>
+
+                <p>
+                  You decide whether the information belongs
+                  in your financial ledger.
+                </p>
+
+                <button
+                  class="journey-confirm"
+                  id="confirmJourney"
+                >
+                  Confirm transaction
+                </button>
+
               </div>
+
+
+              <!-- LEDGER -->
+
+              <div
+                class="journey-card hidden"
+                data-stage="3"
+              >
+
+                <div class="journey-icon">
+                  ▤
+                </div>
+
+                <h3>
+                  Added to your ledger
+                </h3>
+
+                <p>
+                  The confirmed transaction becomes part
+                  of your local financial record.
+                </p>
+
+                <div class="journey-meta">
+                  <span>
+                    Groceries
+                  </span>
+
+                  <strong>
+                    − ₹1,240
+                  </strong>
+                </div>
+
+              </div>
+
+
+              <!-- UNDERSTAND -->
+
+              <div
+                class="journey-card hidden"
+                data-stage="4"
+              >
+
+                <div class="journey-icon">
+                  ◇
+                </div>
+
+                <h3>
+                  Understand
+                </h3>
+
+                <p>
+                  Your confirmed records contribute to
+                  the financial picture you see in Peti.
+                </p>
+
+                <div class="journey-meta">
+                  <span>
+                    Ledger updated
+                  </span>
+
+                  <strong
+                    class="journey-complete"
+                  >
+                    ✓ Complete
+                  </strong>
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="journey-dots">
+
+              <span class="journey-dot active"></span>
+              <span class="journey-dot"></span>
+              <span class="journey-dot"></span>
+              <span class="journey-dot"></span>
+              <span class="journey-dot"></span>
 
             </div>
 
@@ -2007,12 +3655,13 @@
         </div>
 
       </div>
+
     </section>
 
 
-    <!-- =========================
-         RECURRING COMMITMENTS
-    ========================== -->
+    <!-- =====================================
+         RECURRING
+    ====================================== -->
 
     <section class="section">
 
@@ -2030,8 +3679,8 @@
           </h2>
 
           <p>
-            Recurring expenses shouldn't become visible only after the
-            money has already left. Peti keeps recurring commitments
+            Recurring expenses shouldn't become visible only after
+            the money has already left. Peti keeps recurring commitments
             visible so you can see upcoming financial obligations in advance.
           </p>
 
@@ -2060,15 +3709,26 @@
         <div class="recurring-card reveal delay-2">
 
           <div class="recurring-head">
-            <span>Upcoming commitments</span>
-            <span class="local-tag">LOCAL</span>
+
+            <span>
+              Upcoming commitments
+            </span>
+
+            <span class="local-tag">
+              LOCAL
+            </span>
+
           </div>
+
 
           <div class="commitment">
 
-            <div class="commitment-icon">↻</div>
+            <div class="commitment-icon">
+              ↻
+            </div>
 
             <div>
+
               <div class="commitment-name">
                 Monthly subscription
               </div>
@@ -2076,20 +3736,32 @@
               <div class="commitment-date">
                 Due in 3 days
               </div>
+
             </div>
 
             <div class="commitment-right">
-              <div class="commitment-amount">₹499</div>
-              <div class="commitment-status">UPCOMING</div>
+
+              <div class="commitment-amount">
+                ₹499
+              </div>
+
+              <div class="commitment-status">
+                UPCOMING
+              </div>
+
             </div>
 
           </div>
 
+
           <div class="commitment">
 
-            <div class="commitment-icon">↻</div>
+            <div class="commitment-icon">
+              ↻
+            </div>
 
             <div>
+
               <div class="commitment-name">
                 Recurring payment
               </div>
@@ -2097,20 +3769,32 @@
               <div class="commitment-date">
                 Due in 9 days
               </div>
+
             </div>
 
             <div class="commitment-right">
-              <div class="commitment-amount">₹799</div>
-              <div class="commitment-status">UPCOMING</div>
+
+              <div class="commitment-amount">
+                ₹799
+              </div>
+
+              <div class="commitment-status">
+                UPCOMING
+              </div>
+
             </div>
 
           </div>
 
+
           <div class="commitment">
 
-            <div class="commitment-icon">↻</div>
+            <div class="commitment-icon">
+              ↻
+            </div>
 
             <div>
+
               <div class="commitment-name">
                 Annual renewal
               </div>
@@ -2118,11 +3802,19 @@
               <div class="commitment-date">
                 Due in 24 days
               </div>
+
             </div>
 
             <div class="commitment-right">
-              <div class="commitment-amount">₹1,299</div>
-              <div class="commitment-status">UPCOMING</div>
+
+              <div class="commitment-amount">
+                ₹1,299
+              </div>
+
+              <div class="commitment-status">
+                UPCOMING
+              </div>
+
             </div>
 
           </div>
@@ -2134,59 +3826,210 @@
     </section>
 
 
-    <!-- =========================
-         PRIVACY
-    ========================== -->
+    <!-- =====================================
+         BACKUP
+    ====================================== -->
 
     <section class="section">
 
       <div class="container">
 
-        <div class="privacy-center reveal">
+        <div class="control reveal">
+
+          <div class="eyebrow">
+            Your data, your control
+          </div>
+
+          <h2>
+            Local doesn't mean
+            locked to one device.
+          </h2>
+
+          <p>
+            Your ledger stays local by default. When you need another copy,
+            Peti gives you control over how your data is backed up and exported.
+          </p>
+
+
+          <div class="control-diagram">
+
+            <div class="control-node">
+
+              <div class="control-node-icon">
+                🔐
+              </div>
+
+              <h3>
+                Your device
+              </h3>
+
+              <p>
+                Your encrypted local ledger
+                remains at the center.
+              </p>
+
+            </div>
+
+
+            <div class="control-connector"></div>
+
+
+            <div class="control-node">
+
+              <div class="control-node-icon">
+                ↓
+              </div>
+
+              <h3>
+                Your chosen backup
+              </h3>
+
+              <p>
+                Keep another copy under
+                your own control.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="control-note">
+
+            <strong>
+              The important distinction:
+            </strong>
+
+            Peti doesn't need to become the place where
+            your only copy of your financial history lives.
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================
+         PRIVACY ARCHITECTURE
+    ====================================== -->
+
+    <section class="section">
+
+      <div class="container privacy">
+
+        <div class="reveal">
 
           <div class="eyebrow">
             Privacy by architecture
           </div>
 
           <h2>
-            Privacy starts with where
-            your ledger lives.
+            Privacy starts with
+            where your ledger lives.
           </h2>
 
-          <p>
-            Peti is designed so your personal financial records can
-            remain on your device rather than becoming part of a
-            remote financial database.
+          <p class="privacy-intro">
+            Peti is designed around keeping your personal financial records
+            on your device rather than making a remote financial database
+            the foundation of your ledger.
           </p>
 
         </div>
 
 
-        <div class="privacy-grid">
+        <div class="privacy-diagram reveal">
 
-          <div class="privacy-item reveal">
-            <div class="privacy-icon">◇</div>
-            <strong>Encrypted local storage</strong>
+          <div class="privacy-line privacy-line-1"></div>
+          <div class="privacy-line privacy-line-2"></div>
+          <div class="privacy-line privacy-line-3"></div>
+          <div class="privacy-line privacy-line-4"></div>
+
+
+          <div class="privacy-core">
+
+            <div class="privacy-core-icon">
+              🔐
+            </div>
+
+            <strong>
+              Your Ledger
+            </strong>
+
+            <span>
+              Encrypted locally
+            </span>
+
           </div>
 
-          <div class="privacy-item reveal delay-1">
-            <div class="privacy-icon">◇</div>
-            <strong>App lock</strong>
+
+          <div class="privacy-node">
+
+            <div class="privacy-node-icon">
+              ◇
+            </div>
+
+            <strong>
+              Encrypted storage
+            </strong>
+
+            <span>
+              Financial records stay local.
+            </span>
+
           </div>
 
-          <div class="privacy-item reveal delay-2">
-            <div class="privacy-icon">↓</div>
-            <strong>Controlled backup</strong>
+
+          <div class="privacy-node">
+
+            <div class="privacy-node-icon">
+              ◇
+            </div>
+
+            <strong>
+              App lock
+            </strong>
+
+            <span>
+              Add protection around access.
+            </span>
+
           </div>
 
-          <div class="privacy-item reveal delay-3">
-            <div class="privacy-icon">↗</div>
-            <strong>Data export</strong>
+
+          <div class="privacy-node">
+
+            <div class="privacy-node-icon">
+              ↓
+            </div>
+
+            <strong>
+              Backup
+            </strong>
+
+            <span>
+              Keep another copy under your control.
+            </span>
+
           </div>
 
-          <div class="privacy-item reveal delay-3">
-            <div class="privacy-icon">+</div>
-            <strong>No bank credentials required</strong>
+
+          <div class="privacy-node">
+
+            <div class="privacy-node-icon">
+              ↗
+            </div>
+
+            <strong>
+              Export
+            </strong>
+
+            <span>
+              Take your records with you.
+            </span>
+
           </div>
 
         </div>
@@ -2199,9 +4042,8 @@
           </strong>
 
           <p>
-            Peti is built around keeping your financial data under your
-            control — with local storage, protection, backup, and export
-            built into the product model.
+            Local storage, encryption, app protection, backup,
+            and export are all part of the product's data-control model.
           </p>
 
         </div>
@@ -2211,9 +4053,384 @@
     </section>
 
 
-    <!-- =========================
+    <!-- =====================================
+         PRODUCT PREVIEW
+    ====================================== -->
+
+    <section class="section">
+
+      <div class="container preview">
+
+        <div class="reveal">
+
+          <div class="eyebrow">
+            Built for real financial moments
+          </div>
+
+          <h2>
+            Everything revolves
+            around your ledger.
+          </h2>
+
+          <p class="preview-intro">
+            Explore the three parts of Peti that work together:
+            your ledger, transaction review, and recurring commitments.
+          </p>
+
+        </div>
+
+
+        <div class="preview-tabs reveal">
+
+          <button
+            class="preview-tab active"
+            data-preview="ledger"
+          >
+            Ledger
+          </button>
+
+          <button
+            class="preview-tab"
+            data-preview="draft"
+          >
+            Draft
+          </button>
+
+          <button
+            class="preview-tab"
+            data-preview="commitments"
+          >
+            Commitments
+          </button>
+
+        </div>
+
+
+        <div class="preview-window reveal">
+
+          <!-- LEDGER -->
+
+          <div
+            class="preview-screen active"
+            id="preview-ledger"
+          >
+
+            <div class="preview-screen-title">
+
+              <span>
+                My Ledger
+              </span>
+
+              <span class="local-tag">
+                LOCAL
+              </span>
+
+            </div>
+
+            <div class="preview-screen-content">
+
+              <div class="preview-small">
+                Available balance
+              </div>
+
+              <div class="preview-big-number">
+                ₹48,260
+              </div>
+
+              <div class="preview-list">
+
+                <div class="preview-list-row">
+
+                  <div class="preview-list-icon">
+                    F
+                  </div>
+
+                  <div class="preview-list-info">
+
+                    <strong>
+                      Food & Dining
+                    </strong>
+
+                    <span>
+                      Today · Confirmed
+                    </span>
+
+                  </div>
+
+                  <div class="preview-list-value">
+                    − ₹420
+                  </div>
+
+                </div>
+
+
+                <div class="preview-list-row">
+
+                  <div class="preview-list-icon">
+                    T
+                  </div>
+
+                  <div class="preview-list-info">
+
+                    <strong>
+                      Transport
+                    </strong>
+
+                    <span>
+                      Today · Confirmed
+                    </span>
+
+                  </div>
+
+                  <div class="preview-list-value">
+                    − ₹180
+                  </div>
+
+                </div>
+
+
+                <div class="preview-list-row">
+
+                  <div class="preview-list-icon">
+                    +
+                  </div>
+
+                  <div class="preview-list-info">
+
+                    <strong>
+                      Income
+                    </strong>
+
+                    <span>
+                      Yesterday · Confirmed
+                    </span>
+
+                  </div>
+
+                  <div
+                    class="preview-list-value"
+                    style="color:var(--green);"
+                  >
+                    + ₹4,500
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- DRAFT -->
+
+          <div
+            class="preview-screen"
+            id="preview-draft"
+          >
+
+            <div class="preview-screen-title">
+
+              <span>
+                Transaction review
+              </span>
+
+              <span
+                class="local-tag"
+                style="color:var(--gold);"
+              >
+                DRAFT
+              </span>
+
+            </div>
+
+            <div class="preview-screen-content">
+
+              <div class="preview-list">
+
+                <div class="preview-list-row">
+
+                  <div class="preview-list-icon">
+                    G
+                  </div>
+
+                  <div class="preview-list-info">
+
+                    <strong>
+                      Grocery purchase
+                    </strong>
+
+                    <span>
+                      Captured information
+                    </span>
+
+                  </div>
+
+                  <div class="preview-list-value">
+                    ₹1,240
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="review-card" style="margin-top:20px;">
+
+                <div class="review-row">
+                  <span>Amount</span>
+                  <strong>₹1,240</strong>
+                </div>
+
+                <div class="review-row">
+                  <span>Category</span>
+                  <strong>Groceries</strong>
+                </div>
+
+                <div class="review-row">
+                  <span>Date</span>
+                  <strong>27 Sep 2026</strong>
+                </div>
+
+                <div class="review-buttons">
+
+                  <button class="review-button">
+                    Review / Edit
+                  </button>
+
+                  <button
+                    class="review-button"
+                    style="
+                      background:var(--gold);
+                      color:#080c13;
+                      border-color:var(--gold);
+                    "
+                  >
+                    Confirm
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- COMMITMENTS -->
+
+          <div
+            class="preview-screen"
+            id="preview-commitments"
+          >
+
+            <div class="preview-screen-title">
+
+              <span>
+                Upcoming commitments
+              </span>
+
+              <span class="local-tag">
+                LOCAL
+              </span>
+
+            </div>
+
+            <div class="preview-screen-content">
+
+              <div class="preview-list">
+
+                <div class="preview-list-row">
+
+                  <div class="preview-list-icon">
+                    ↻
+                  </div>
+
+                  <div class="preview-list-info">
+
+                    <strong>
+                      Monthly subscription
+                    </strong>
+
+                    <span>
+                      Due in 3 days
+                    </span>
+
+                  </div>
+
+                  <div class="preview-list-value">
+                    ₹499
+                  </div>
+
+                </div>
+
+
+                <div class="preview-list-row">
+
+                  <div class="preview-list-icon">
+                    ↻
+                  </div>
+
+                  <div class="preview-list-info">
+
+                    <strong>
+                      Recurring payment
+                    </strong>
+
+                    <span>
+                      Due in 9 days
+                    </span>
+
+                  </div>
+
+                  <div class="preview-list-value">
+                    ₹799
+                  </div>
+
+                </div>
+
+
+                <div class="preview-list-row">
+
+                  <div class="preview-list-icon">
+                    ↻
+                  </div>
+
+                  <div class="preview-list-info">
+
+                    <strong>
+                      Annual renewal
+                    </strong>
+
+                    <span>
+                      Due in 24 days
+                    </span>
+
+                  </div>
+
+                  <div class="preview-list-value">
+                    ₹1,299
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================
          FINAL CTA
-    ========================== -->
+    ====================================== -->
 
     <section class="section final">
 
@@ -2223,7 +4440,7 @@
           src="logo.png"
           alt="Peti"
           class="final-logo"
-        />
+        >
 
         <h2>
           Personal finance should
@@ -2248,34 +4465,36 @@
   </main>
 
 
-  <!-- =========================
+  <!-- =====================================
        FOOTER
-  ========================== -->
+  ====================================== -->
 
   <footer>
+
     <div class="container footer-inner">
 
-      <div>
+      <span>
         © 2026 Peti
-      </div>
+      </span>
 
-      <div>
+      <span>
         Private Money Ledger · iOS & Android
-      </div>
+      </span>
 
     </div>
+
   </footer>
 
 
-  <!-- =========================
+  <!-- =====================================
        JAVASCRIPT
-  ========================== -->
+  ====================================== -->
 
   <script>
 
-    /* -------------------------
+    /* =====================================
        SCROLL REVEAL
-    ------------------------- */
+    ===================================== */
 
     const revealElements =
       document.querySelectorAll(".reveal");
@@ -2298,7 +4517,7 @@
 
         },
         {
-          threshold: 0.12
+          threshold: .12
         }
       );
 
@@ -2307,9 +4526,9 @@
     });
 
 
-    /* -------------------------
-       SUBTLE MOUSE PARALLAX
-    ------------------------- */
+    /* =====================================
+       HERO PARALLAX
+    ===================================== */
 
     const heroVisual =
       document.querySelector(".hero-visual");
@@ -2323,211 +4542,340 @@
     const upcomingCard =
       document.querySelector(".upcoming-card");
 
-    if (window.matchMedia("(pointer:fine)").matches) {
+    if (
+      heroVisual &&
+      window.matchMedia("(pointer:fine)").matches &&
+      !window.matchMedia("(prefers-reduced-motion:reduce)").matches
+    ) {
 
-      heroVisual.addEventListener("mousemove", (event) => {
+      heroVisual.addEventListener(
+        "mousemove",
+        (event) => {
 
-        const rect =
-          heroVisual.getBoundingClientRect();
+          const rect =
+            heroVisual.getBoundingClientRect();
 
-        const x =
-          (event.clientX - rect.left) / rect.width - 0.5;
+          const x =
+            (event.clientX - rect.left) /
+            rect.width - .5;
 
-        const y =
-          (event.clientY - rect.top) / rect.height - 0.5;
+          const y =
+            (event.clientY - rect.top) /
+            rect.height - .5;
 
-        phone.style.transform =
-          `rotateY(${-7 + x * 8}deg)
-           rotateX(${2 - y * 5}deg)
-           translate(${x * 7}px, ${y * 7}px)`;
+          phone.style.transform =
+            `
+              rotateY(${x * 8 - 7}deg)
+              rotateX(${y * -5 + 2}deg)
+              translate(${x * 6}px,${y * 6}px)
+            `;
 
-        privacyCard.style.transform =
-          `translate(${x * -12}px, ${y * -8}px)`;
+          privacyCard.style.transform =
+            `
+              translate(${x * -10}px,${y * -7}px)
+            `;
 
-        upcomingCard.style.transform =
-          `translate(${x * 10}px, ${y * 8}px)`;
+          upcomingCard.style.transform =
+            `
+              translate(${x * 9}px,${y * 7}px)
+            `;
 
-      });
-
-      heroVisual.addEventListener("mouseleave", () => {
-
-        phone.style.transform =
-          "rotateY(-7deg) rotateX(2deg)";
-
-        privacyCard.style.transform = "";
-        upcomingCard.style.transform = "";
-
-      });
-
-    }
-
-
-    /* -------------------------
-       CTA MICRO INTERACTION
-    ------------------------- */
-
-    document.querySelectorAll(".cta").forEach((button) => {
-
-      button.addEventListener("mousemove", (event) => {
-
-        const rect =
-          button.getBoundingClientRect();
-
-        const x =
-          event.clientX - rect.left;
-
-        const y =
-          event.clientY - rect.top;
-
-        button.style.setProperty(
-          "--mouse-x",
-          `${x}px`
-        );
-
-        button.style.setProperty(
-          "--mouse-y",
-          `${y}px`
-        );
-
-      });
-
-    });
-
-
-    /* -------------------------
-       PHONE VISIBILITY
-    ------------------------- */
-
-    const chart =
-      document.querySelector(".chart-path");
-
-    const chartObserver =
-      new IntersectionObserver(
-        (entries) => {
-
-          entries.forEach((entry) => {
-
-            if (entry.isIntersecting) {
-
-              chart.style.animation =
-                "drawChart 2.8s ease forwards";
-
-              chartObserver.unobserve(entry.target);
-
-            }
-
-          });
-
-        },
-        {
-          threshold: .4
         }
       );
 
-    if (chart) {
-      chartObserver.observe(chart);
+      heroVisual.addEventListener(
+        "mouseleave",
+        () => {
+
+          phone.style.transform =
+            "rotateY(-7deg) rotateX(2deg)";
+
+          privacyCard.style.transform = "";
+          upcomingCard.style.transform = "";
+
+        }
+      );
+
     }
 
 
-    /* -------------------------
-       CARD TILT
-    ------------------------- */
+    /* =====================================
+       LEDGER CARD TILT
+    ===================================== */
 
-    if (window.matchMedia("(pointer:fine)").matches) {
+    if (
+      window.matchMedia("(pointer:fine)").matches
+    ) {
 
       document
         .querySelectorAll(
-          ".ledger-card, .demo-window, .recurring-card"
+          ".ledger-card,.recurring-card,.preview-window"
         )
         .forEach((card) => {
 
-          card.addEventListener("mousemove", (event) => {
+          card.addEventListener(
+            "mousemove",
+            (event) => {
 
-            const rect =
-              card.getBoundingClientRect();
+              const rect =
+                card.getBoundingClientRect();
 
-            const x =
-              (event.clientX - rect.left) / rect.width - .5;
+              const x =
+                (event.clientX - rect.left) /
+                rect.width - .5;
 
-            const y =
-              (event.clientY - rect.top) / rect.height - .5;
+              const y =
+                (event.clientY - rect.top) /
+                rect.height - .5;
 
-            card.style.transform =
-              `perspective(1000px)
-               rotateX(${y * -2}deg)
-               rotateY(${x * 2}deg)
-               translateY(-2px)`;
+              card.style.transform =
+                `
+                  perspective(1000px)
+                  rotateX(${y * -2}deg)
+                  rotateY(${x * 2}deg)
+                  translateY(-2px)
+                `;
 
-          });
+            }
+          );
 
-          card.addEventListener("mouseleave", () => {
+          card.addEventListener(
+            "mouseleave",
+            () => {
 
-            card.style.transform = "";
+              card.style.transform = "";
 
-          });
+            }
+          );
 
         });
 
     }
 
 
-    /* -------------------------
-       ACTIVE FLOW STEP
-    ------------------------- */
+    /* =====================================
+       FLOW STEP ANIMATION
+    ===================================== */
 
     const flowSteps =
       document.querySelectorAll(".flow-step");
 
-    const flowObserver =
-      new IntersectionObserver(
-        (entries) => {
+    let flowIndex = 0;
 
-          entries.forEach((entry) => {
+    function activateFlowStep() {
 
-            if (entry.isIntersecting) {
+      flowSteps.forEach((step) => {
+        step.classList.remove("active");
+      });
 
-              flowSteps.forEach((step, index) => {
+      if (flowSteps[flowIndex]) {
+        flowSteps[flowIndex]
+          .classList.add("active");
+      }
 
-                setTimeout(() => {
+      flowIndex =
+        (flowIndex + 1) %
+        flowSteps.length;
+    }
 
-                  const number =
-                    step.querySelector(".flow-number");
+    setInterval(
+      activateFlowStep,
+      1700
+    );
 
-                  number.style.borderColor =
-                    "rgba(251,189,50,.55)";
 
-                  number.style.boxShadow =
-                    "0 0 0 7px var(--bg), 0 0 28px rgba(251,189,50,.12)";
+    /* =====================================
+       TRANSACTION JOURNEY
+    ===================================== */
 
-                  setTimeout(() => {
+    const journeyCards =
+      document.querySelectorAll(".journey-card");
 
-                    number.style.borderColor = "";
-                    number.style.boxShadow = "";
+    const journeyDots =
+      document.querySelectorAll(".journey-dot");
 
-                  }, 700);
+    const journeyStatus =
+      document.getElementById("journeyStatus");
 
-                }, index * 300);
+    const confirmJourney =
+      document.getElementById("confirmJourney");
 
-              });
+    const journeyNames = [
+      "CAPTURE",
+      "DRAFT",
+      "REVIEW",
+      "LEDGER",
+      "UNDERSTAND"
+    ];
 
-              flowObserver.unobserve(entry.target);
+    let journeyIndex = 0;
 
-            }
+    function showJourney(index) {
 
-          });
+      journeyCards.forEach((card) => {
 
-        },
-        {
-          threshold: .4
+        const stage =
+          Number(card.dataset.stage);
+
+        card.classList.toggle(
+          "show",
+          stage === index
+        );
+
+        card.classList.toggle(
+          "hidden",
+          stage !== index
+        );
+
+      });
+
+      journeyDots.forEach((dot, i) => {
+
+        dot.classList.toggle(
+          "active",
+          i === index
+        );
+
+      });
+
+      journeyStatus.textContent =
+        journeyNames[index];
+
+    }
+
+    function nextJourney() {
+
+      journeyIndex =
+        (journeyIndex + 1) %
+        journeyCards.length;
+
+      showJourney(journeyIndex);
+
+    }
+
+    let journeyTimer =
+      setInterval(
+        nextJourney,
+        2600
+      );
+
+
+    if (confirmJourney) {
+
+      confirmJourney.addEventListener(
+        "click",
+        () => {
+
+          clearInterval(journeyTimer);
+
+          journeyIndex = 3;
+
+          showJourney(3);
+
+          setTimeout(
+            () => {
+
+              journeyIndex = 4;
+
+              showJourney(4);
+
+              journeyTimer =
+                setInterval(
+                  nextJourney,
+                  2600
+                );
+
+            },
+            2300
+          );
+
         }
       );
 
-    const flowDemo =
-      document.querySelector(".flow-demo");
-
-    if (flowDemo) {
-      flowObserver.observe(flowDemo);
     }
+
+
+    /* =====================================
+       PRODUCT PREVIEW TABS
+    ===================================== */
+
+    const previewTabs =
+      document.querySelectorAll(".preview-tab");
+
+    const previewScreens =
+      document.querySelectorAll(".preview-screen");
+
+    previewTabs.forEach((tab) => {
+
+      tab.addEventListener(
+        "click",
+        () => {
+
+          const target =
+            tab.dataset.preview;
+
+          previewTabs.forEach((item) => {
+            item.classList.remove("active");
+          });
+
+          previewScreens.forEach((screen) => {
+            screen.classList.remove("active");
+          });
+
+          tab.classList.add("active");
+
+          const targetScreen =
+            document.getElementById(
+              `preview-${target}`
+            );
+
+          if (targetScreen) {
+            targetScreen.classList.add("active");
+          }
+
+        }
+      );
+
+    });
+
+
+    /* =====================================
+       CTA PRESS EFFECT
+    ===================================== */
+
+    document
+      .querySelectorAll(".cta")
+      .forEach((button) => {
+
+        button.addEventListener(
+          "mousedown",
+          () => {
+
+            button.style.transform =
+              "translateY(1px) scale(.985)";
+
+          }
+        );
+
+        button.addEventListener(
+          "mouseup",
+          () => {
+
+            button.style.transform = "";
+
+          }
+        );
+
+        button.addEventListener(
+          "mouseleave",
+          () => {
+
+            button.style.transform = "";
+
+          }
+        );
+
+      });
 
   </script>
 
