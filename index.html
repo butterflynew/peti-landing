@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Peti — Private Money Ledger</title>
 
   <style>
@@ -44,42 +45,42 @@
     }
 
     .page {
-      width: 100%;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
 
-    /* ---------- Navigation ---------- */
+    /* =========================
+       NAVIGATION
+    ========================= */
 
     nav {
       width: 100%;
-      padding: 28px 6%;
+      padding: 24px 6%;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    .logo {
+    .logo-link {
       display: flex;
       align-items: center;
-      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-image {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .brand-name {
+      margin-left: 12px;
       font-size: 21px;
       font-weight: 700;
       letter-spacing: -0.5px;
-    }
-
-    .logo-mark {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      display: grid;
-      place-items: center;
-      background: var(--accent-soft);
-      border: 1px solid rgba(16, 185, 129, 0.25);
-      color: var(--accent);
-      font-size: 16px;
-      font-weight: 800;
+      color: var(--text);
     }
 
     .nav-label {
@@ -88,12 +89,14 @@
       letter-spacing: 0.2px;
     }
 
-    /* ---------- Hero ---------- */
+    /* =========================
+       HERO
+    ========================= */
 
     .hero {
       width: min(1100px, 90%);
       margin: 0 auto;
-      padding: 110px 0 90px;
+      padding: 105px 0 90px;
       text-align: center;
     }
 
@@ -146,20 +149,31 @@
       font-weight: 600;
     }
 
+    /* =========================
+       CTA
+    ========================= */
+
     .cta {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
+
       margin-top: 38px;
       padding: 15px 23px;
+
       border-radius: 12px;
+
       background: var(--accent);
       color: #03140e;
+
       text-decoration: none;
+
       font-size: 15px;
       font-weight: 700;
+
       box-shadow: 0 10px 35px rgba(16, 185, 129, 0.16);
+
       transition:
         transform 0.2s ease,
         background 0.2s ease,
@@ -182,7 +196,9 @@
       transform: translateX(3px);
     }
 
-    /* ---------- Features ---------- */
+    /* =========================
+       FEATURES
+    ========================= */
 
     .features-section {
       width: min(1100px, 90%);
@@ -215,9 +231,12 @@
     .feature-card {
       min-height: 230px;
       padding: 25px;
+
       border: 1px solid var(--card-border);
       border-radius: 16px;
+
       background: var(--card);
+
       transition:
         transform 0.25s ease,
         border-color 0.25s ease,
@@ -233,43 +252,59 @@
     .feature-icon {
       width: 43px;
       height: 43px;
+
       display: grid;
       place-items: center;
+
       margin-bottom: 28px;
+
       border-radius: 12px;
+
       background: var(--accent-soft);
       border: 1px solid rgba(16, 185, 129, 0.18);
+
       color: var(--accent);
+
       font-size: 18px;
       font-weight: 700;
     }
 
     .feature-card h3 {
       margin-bottom: 10px;
+
       font-size: 17px;
       letter-spacing: -0.3px;
     }
 
     .feature-card p {
       color: var(--muted);
+
       font-size: 13.5px;
       line-height: 1.65;
     }
 
-    /* ---------- Privacy statement ---------- */
+    /* =========================
+       PRIVACY STRIP
+    ========================= */
 
     .privacy-strip {
       width: min(1100px, 90%);
       margin: 0 auto 80px;
+
       padding: 25px 28px;
+
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 12px;
+
       border: 1px solid rgba(16, 185, 129, 0.16);
       border-radius: 14px;
+
       background: rgba(16, 185, 129, 0.045);
+
       color: #a7f3d0;
+
       text-align: center;
       font-size: 13px;
     }
@@ -278,16 +313,23 @@
       color: #d1fae5;
     }
 
-    /* ---------- Footer ---------- */
+    /* =========================
+       FOOTER
+    ========================= */
 
     footer {
       margin-top: auto;
+
       padding: 30px 6%;
+
       border-top: 1px solid #151d2b;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
+
       color: #64748b;
+
       font-size: 12px;
     }
 
@@ -295,7 +337,9 @@
       color: #94a3b8;
     }
 
-    /* ---------- Responsive ---------- */
+    /* =========================
+       RESPONSIVE
+    ========================= */
 
     @media (max-width: 900px) {
       .features {
@@ -308,8 +352,19 @@
     }
 
     @media (max-width: 600px) {
+
       nav {
-        padding: 22px 5%;
+        padding: 20px 5%;
+      }
+
+      .logo-image {
+        width: 42px;
+        height: 42px;
+      }
+
+      .brand-name {
+        font-size: 19px;
+        margin-left: 9px;
       }
 
       .nav-label {
@@ -351,8 +406,10 @@
 
       footer {
         padding: 25px 6%;
+
         flex-direction: column;
         gap: 8px;
+
         text-align: center;
       }
     }
@@ -360,20 +417,45 @@
 </head>
 
 <body>
+
   <div class="page">
 
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+
     <nav>
-      <div class="logo">
-        <div class="logo-mark">P</div>
-        <span>Peti</span>
+
+      <a href="#" class="logo-link">
+
+        <!-- Your Peti logo -->
+        <img
+          src="logo.png"
+          alt="Peti logo"
+          class="logo-image"
+        >
+
+        <span class="brand-name">Peti</span>
+
+      </a>
+
+      <div class="nav-label">
+        Private Money Ledger
       </div>
 
-      <div class="nav-label">Private Money Ledger</div>
     </nav>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
 
     <main>
 
+      <!-- HERO -->
+
       <section class="hero">
+
         <div class="eyebrow">
           <span class="eyebrow-dot"></span>
           Local-first personal finance
@@ -387,7 +469,8 @@
         <p class="hero-subtitle">
           Peti is a private personal finance ledger built for
           <strong>zero-login</strong> use, with
-          <strong>no cloud accounts</strong>, <strong>no bank server logins</strong>,
+          <strong>no cloud accounts</strong>,
+          <strong>no bank server logins</strong>,
           and <strong>local-first encryption</strong>.
           Your financial data stays with you.
         </p>
@@ -396,68 +479,149 @@
           Join the Early Access Telegram
           <span class="cta-arrow">→</span>
         </a>
+
       </section>
+
+
+      <!-- FEATURES -->
 
       <section class="features-section">
 
         <div class="section-heading">
-          <h2>Privacy by architecture.</h2>
-          <p>Not a setting you have to remember to turn on.</p>
+
+          <h2>
+            Privacy by architecture.
+          </h2>
+
+          <p>
+            Not a setting you have to remember to turn on.
+          </p>
+
         </div>
+
 
         <div class="features">
 
+
+          <!-- FEATURE 1 -->
+
           <article class="feature-card">
-            <div class="feature-icon">01</div>
-            <h3>Zero-Login</h3>
+
+            <div class="feature-icon">
+              01
+            </div>
+
+            <h3>
+              Zero-Login
+            </h3>
+
             <p>
               No account creation, email, phone number, or password required.
               Open Peti and start managing your money immediately.
             </p>
+
           </article>
 
+
+          <!-- FEATURE 2 -->
+
           <article class="feature-card">
-            <div class="feature-icon">02</div>
-            <h3>100% On-Device Storage</h3>
+
+            <div class="feature-icon">
+              02
+            </div>
+
+            <h3>
+              100% On-Device Storage
+            </h3>
+
             <p>
               Your financial ledger is stored locally on your device.
               No routine cloud database is required to keep your records.
             </p>
+
           </article>
 
+
+          <!-- FEATURE 3 -->
+
           <article class="feature-card">
-            <div class="feature-icon">03</div>
-            <h3>Draft-First Capture</h3>
+
+            <div class="feature-icon">
+              03
+            </div>
+
+            <h3>
+              Draft-First Capture
+            </h3>
+
             <p>
               Capture transactions quickly and review them before they become
               part of your permanent ledger. You stay in control.
             </p>
+
           </article>
 
+
+          <!-- FEATURE 4 -->
+
           <article class="feature-card">
-            <div class="feature-icon">04</div>
-            <h3>Absolute Privacy</h3>
+
+            <div class="feature-icon">
+              04
+            </div>
+
+            <h3>
+              Absolute Privacy
+            </h3>
+
             <p>
               Designed around private-by-default finance. No bank credentials
               and no financial data sent to a remote account system.
             </p>
+
           </article>
 
+
         </div>
+
       </section>
 
+
+      <!-- PRIVACY -->
+
       <div class="privacy-strip">
+
         <span>🔒</span>
-        <span><strong>Peti keeps your financial life local.</strong> Your data belongs on your device.</span>
+
+        <span>
+          <strong>
+            Peti keeps your financial life local.
+          </strong>
+
+          Your data belongs on your device.
+        </span>
+
       </div>
 
     </main>
 
+
+    <!-- FOOTER -->
+
     <footer>
-      <span>© 2026 <strong>Peti</strong></span>
-      <span>Private Money Ledger · iOS &amp; Android</span>
+
+      <span>
+        © 2026 <strong>Peti</strong>
+      </span>
+
+      <span>
+        Private Money Ledger · iOS &amp; Android
+      </span>
+
     </footer>
 
   </div>
+
 </body>
 </html>
