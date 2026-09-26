@@ -10,23 +10,24 @@
     :root {
       --bg: #0b1017;
       --bg-soft: #0f161f;
+
       --surface: #131c26;
       --surface-hover: #17222d;
 
-      --border: #24313e;
-      --border-soft: #1b2631;
+      --border: #253240;
+      --border-soft: #1a2530;
 
-      --text: #f4f6f8;
-      --text-secondary: #c4ccd5;
-      --muted: #8793a0;
+      --text: #f5f7f9;
+      --text-secondary: #c5cdd6;
+      --muted: #8995a3;
 
       --gold: #f2b936;
-      --gold-hover: #e3a928;
+      --gold-hover: #e5aa29;
       --gold-soft: rgba(242, 185, 54, 0.10);
-      --gold-border: rgba(242, 185, 54, 0.22);
+      --gold-border: rgba(242, 185, 54, 0.24);
 
       --green: #10b981;
-      --green-soft: rgba(16, 185, 129, 0.09);
+      --green-soft: rgba(16, 185, 129, 0.08);
       --green-border: rgba(16, 185, 129, 0.20);
 
       --max-width: 1120px;
@@ -44,11 +45,12 @@
 
     body {
       min-height: 100vh;
+
       background:
         radial-gradient(
-          circle at 50% 0%,
-          rgba(242, 185, 54, 0.045),
-          transparent 35%
+          circle at 50% -5%,
+          rgba(242, 185, 54, 0.055),
+          transparent 34%
         ),
         var(--bg);
 
@@ -78,9 +80,9 @@
 
     nav {
       width: min(var(--max-width), 90%);
-      margin: 0 auto;
-
       height: 92px;
+
+      margin: 0 auto;
 
       display: flex;
       align-items: center;
@@ -95,24 +97,25 @@
       text-decoration: none;
     }
 
-    .brand img {
+    .brand-logo {
       width: 48px;
       height: 48px;
 
-      object-fit: contain;
       display: block;
+      object-fit: contain;
     }
 
     .brand-name {
       font-size: 21px;
       font-weight: 750;
+
       letter-spacing: -0.6px;
     }
 
-    .brand-tagline {
+    .brand-description {
       color: var(--muted);
+
       font-size: 13px;
-      letter-spacing: 0.1px;
     }
 
     /* =========================================================
@@ -121,25 +124,28 @@
 
     .hero {
       width: min(var(--max-width), 90%);
+
       margin: 0 auto;
 
-      padding: 105px 0 125px;
+      padding: 95px 0 125px;
 
       text-align: center;
     }
 
     .hero-logo {
-      width: 92px;
-      height: 92px;
+      width: 96px;
+      height: 96px;
+
+      display: block;
 
       object-fit: contain;
 
       margin: 0 auto 30px;
 
-      display: block;
-
       filter:
-        drop-shadow(0 15px 35px rgba(0, 0, 0, 0.28));
+        drop-shadow(
+          0 18px 35px rgba(0, 0, 0, 0.28)
+        );
     }
 
     .eyebrow {
@@ -149,7 +155,7 @@
 
       padding: 8px 14px;
 
-      margin-bottom: 27px;
+      margin-bottom: 28px;
 
       border:
         1px solid var(--gold-border);
@@ -159,7 +165,7 @@
       background:
         var(--gold-soft);
 
-      color: #f5ca67;
+      color: #f4ca69;
 
       font-size: 12px;
       font-weight: 650;
@@ -180,7 +186,8 @@
     }
 
     .hero h1 {
-      max-width: 950px;
+      max-width: 930px;
+
       margin: 0 auto;
 
       font-size:
@@ -212,7 +219,16 @@
 
     .hero-description strong {
       color: var(--text);
+
       font-weight: 650;
+    }
+
+    .hero-support {
+      margin-top: 17px;
+
+      color: var(--muted);
+
+      font-size: 13px;
     }
 
     /* =========================================================
@@ -227,13 +243,13 @@
 
       margin-top: 38px;
 
-      padding: 16px 24px;
+      padding: 16px 25px;
 
       border-radius: 12px;
 
       background: var(--gold);
 
-      color: #171006;
+      color: #171106;
 
       text-decoration: none;
 
@@ -255,7 +271,7 @@
       transform: translateY(-2px);
 
       box-shadow:
-        0 16px 42px rgba(242, 185, 54, 0.22);
+        0 17px 42px rgba(242, 185, 54, 0.21);
     }
 
     .cta-arrow {
@@ -270,26 +286,37 @@
     }
 
     /* =========================================================
-       SECTION COMMON
+       GENERAL SECTION
     ========================================================= */
 
     .section {
       width: min(var(--max-width), 90%);
+
       margin: 0 auto;
 
       padding: 105px 0;
     }
 
+    .section-border {
+      border-top:
+        1px solid var(--border-soft);
+
+      border-bottom:
+        1px solid var(--border-soft);
+    }
+
     .section-label {
       color: var(--gold);
 
-      font-size: 12px;
+      font-size: 11px;
+
       font-weight: 750;
 
       text-transform: uppercase;
-      letter-spacing: 1.5px;
 
-      margin-bottom: 15px;
+      letter-spacing: 1.6px;
+
+      margin-bottom: 16px;
     }
 
     .section-title {
@@ -306,30 +333,23 @@
     }
 
     .section-description {
-      max-width: 680px;
+      max-width: 690px;
 
-      margin-top: 18px;
+      margin-top: 19px;
 
       color: var(--muted);
 
       font-size: 16px;
+
       line-height: 1.75;
     }
 
     /* =========================================================
-       VALUE SECTION
+       OWNERSHIP SECTION
     ========================================================= */
 
-    .value-section {
-      border-top:
-        1px solid var(--border-soft);
-
-      border-bottom:
-        1px solid var(--border-soft);
-    }
-
-    .value-grid {
-      margin-top: 55px;
+    .ownership-grid {
+      margin-top: 56px;
 
       display: grid;
 
@@ -339,9 +359,7 @@
       gap: 16px;
     }
 
-    .value-card {
-      position: relative;
-
+    .ownership-card {
       padding: 31px;
 
       min-height: 225px;
@@ -354,7 +372,7 @@
       background:
         linear-gradient(
           145deg,
-          var(--surface),
+          #141d27,
           #111923
         );
 
@@ -364,58 +382,205 @@
         background 0.25s ease;
     }
 
-    .value-card:hover {
+    .ownership-card:hover {
       transform: translateY(-4px);
 
       border-color:
-        rgba(242, 185, 54, 0.25);
+        rgba(242, 185, 54, 0.27);
 
       background:
         linear-gradient(
           145deg,
-          var(--surface-hover),
-          #121d27
+          #18232d,
+          #131d27
         );
     }
 
-    .value-number {
-      width: 42px;
-      height: 42px;
+    .card-icon {
+      width: 43px;
+      height: 43px;
 
       display: grid;
       place-items: center;
 
-      border-radius: 11px;
+      margin-bottom: 28px;
 
-      background: var(--gold-soft);
+      border-radius: 12px;
+
+      background:
+        var(--gold-soft);
 
       border:
         1px solid var(--gold-border);
 
       color: var(--gold);
 
-      font-size: 13px;
-      font-weight: 750;
-
-      margin-bottom: 28px;
+      font-size: 17px;
     }
 
-    .value-card h3 {
-      font-size: 20px;
-
-      letter-spacing: -0.5px;
-
+    .ownership-card h3 {
       margin-bottom: 11px;
+
+      font-size: 19px;
+
+      letter-spacing: -0.45px;
     }
 
-    .value-card p {
+    .ownership-card p {
+      max-width: 480px;
+
       color: var(--muted);
 
       font-size: 14px;
 
       line-height: 1.7;
+    }
 
-      max-width: 470px;
+    /* =========================================================
+       LOCAL DOESN'T MEAN LOCKED
+    ========================================================= */
+
+    .backup-section {
+      border-bottom:
+        1px solid var(--border-soft);
+    }
+
+    .backup-grid {
+      display: grid;
+
+      grid-template-columns:
+        0.9fr 1.1fr;
+
+      gap: 75px;
+
+      align-items: center;
+    }
+
+    .backup-copy p {
+      max-width: 560px;
+
+      margin-top: 21px;
+
+      color: var(--muted);
+
+      font-size: 16px;
+
+      line-height: 1.75;
+    }
+
+    .backup-panel {
+      padding: 32px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 20px;
+
+      background:
+        var(--surface);
+    }
+
+    .device-box {
+      padding: 25px;
+
+      border:
+        1px solid var(--border-soft);
+
+      border-radius: 16px;
+
+      background:
+        #101821;
+
+      text-align: center;
+    }
+
+    .device-icon {
+      width: 62px;
+      height: 62px;
+
+      display: grid;
+      place-items: center;
+
+      margin: 0 auto 13px;
+
+      border-radius: 17px;
+
+      background:
+        var(--gold-soft);
+
+      border:
+        1px solid var(--gold-border);
+
+      color: var(--gold);
+
+      font-size: 24px;
+    }
+
+    .device-box strong {
+      display: block;
+
+      font-size: 14px;
+
+      margin-bottom: 5px;
+    }
+
+    .device-box span {
+      color: var(--muted);
+
+      font-size: 11px;
+    }
+
+    .backup-arrows {
+      display: flex;
+
+      justify-content: center;
+
+      gap: 70px;
+
+      margin: 18px 0;
+
+      color: #56616c;
+
+      font-size: 19px;
+    }
+
+    .backup-options {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 12px;
+    }
+
+    .backup-option {
+      padding: 19px;
+
+      border:
+        1px solid var(--border-soft);
+
+      border-radius: 13px;
+
+      background:
+        #111a23;
+    }
+
+    .backup-option strong {
+      display: block;
+
+      color: var(--text-secondary);
+
+      font-size: 12px;
+
+      margin-bottom: 5px;
+    }
+
+    .backup-option span {
+      color: var(--muted);
+
+      font-size: 11px;
+
+      line-height: 1.5;
     }
 
     /* =========================================================
@@ -430,11 +595,7 @@
       text-align: center;
     }
 
-    .workflow-section .section-title {
-      margin-left: auto;
-      margin-right: auto;
-    }
-
+    .workflow-section .section-title,
     .workflow-section .section-description {
       margin-left: auto;
       margin-right: auto;
@@ -444,10 +605,10 @@
       margin-top: 65px;
 
       display: flex;
-      align-items: center;
-      justify-content: center;
 
-      gap: 0;
+      align-items: flex-start;
+
+      justify-content: center;
     }
 
     .workflow-step {
@@ -458,10 +619,10 @@
       width: 58px;
       height: 58px;
 
-      margin: 0 auto 15px;
-
       display: grid;
       place-items: center;
+
+      margin: 0 auto 15px;
 
       border-radius: 50%;
 
@@ -474,13 +635,14 @@
       color: var(--gold);
 
       font-size: 13px;
+
       font-weight: 750;
     }
 
     .workflow-step h3 {
-      font-size: 14px;
-
       margin-bottom: 6px;
+
+      font-size: 14px;
     }
 
     .workflow-step p {
@@ -492,13 +654,11 @@
     }
 
     .workflow-arrow {
-      color: #4c5967;
+      margin: 17px 14px 0;
+
+      color: #4c5864;
 
       font-size: 20px;
-
-      margin: 0 13px;
-
-      padding-bottom: 42px;
     }
 
     /* =========================================================
@@ -513,7 +673,7 @@
         1px solid var(--border-soft);
     }
 
-    .commitment-content {
+    .commitment-grid {
       display: grid;
 
       grid-template-columns:
@@ -524,14 +684,10 @@
       align-items: center;
     }
 
-    .commitment-copy .section-title {
-      max-width: 550px;
-    }
-
     .commitment-copy p {
       max-width: 570px;
 
-      margin-top: 22px;
+      margin-top: 21px;
 
       color: var(--muted);
 
@@ -541,7 +697,7 @@
     }
 
     .commitment-panel {
-      padding: 30px;
+      padding: 28px;
 
       border:
         1px solid var(--border);
@@ -552,28 +708,31 @@
         var(--surface);
     }
 
-    .commitment-header {
+    .panel-heading {
       display: flex;
 
-      align-items: center;
       justify-content: space-between;
 
-      margin-bottom: 24px;
+      align-items: center;
+
+      margin-bottom: 20px;
     }
 
-    .commitment-header span:first-child {
+    .panel-heading strong {
       font-size: 14px;
-      font-weight: 700;
     }
 
-    .commitment-header span:last-child {
+    .panel-status {
       color: var(--green);
 
-      font-size: 11px;
-      font-weight: 700;
+      font-size: 10px;
+
+      font-weight: 750;
+
+      letter-spacing: 0.7px;
     }
 
-    .commitment-item {
+    .commitment {
       display: flex;
 
       align-items: center;
@@ -586,7 +745,7 @@
         1px solid var(--border-soft);
     }
 
-    .commitment-icon {
+    .commitment-symbol {
       width: 38px;
       height: 38px;
 
@@ -600,8 +759,7 @@
 
       color: var(--gold);
 
-      font-size: 13px;
-      font-weight: 750;
+      font-size: 15px;
     }
 
     .commitment-info {
@@ -622,20 +780,22 @@
       font-size: 11px;
     }
 
-    .commitment-amount {
+    .commitment-value {
       text-align: right;
     }
 
-    .commitment-amount strong {
+    .commitment-value strong {
       display: block;
 
       font-size: 13px;
     }
 
-    .commitment-amount span {
+    .commitment-value span {
       color: var(--gold);
 
-      font-size: 10px;
+      font-size: 9px;
+
+      font-weight: 700;
     }
 
     /* =========================================================
@@ -650,11 +810,7 @@
       text-align: center;
     }
 
-    .privacy-section .section-title {
-      margin-left: auto;
-      margin-right: auto;
-    }
-
+    .privacy-section .section-title,
     .privacy-section .section-description {
       margin-left: auto;
       margin-right: auto;
@@ -666,13 +822,13 @@
       display: grid;
 
       grid-template-columns:
-        repeat(4, 1fr);
+        repeat(5, 1fr);
 
-      gap: 12px;
+      gap: 11px;
     }
 
     .privacy-item {
-      padding: 27px 18px;
+      padding: 25px 15px;
 
       border:
         1px solid var(--border);
@@ -683,36 +839,28 @@
         var(--surface);
     }
 
-    .privacy-icon {
+    .privacy-symbol {
       color: var(--gold);
 
       font-size: 18px;
 
-      margin-bottom: 13px;
+      margin-bottom: 12px;
     }
 
     .privacy-item strong {
       display: block;
 
-      font-size: 13px;
+      font-size: 12px;
 
-      line-height: 1.4;
+      line-height: 1.45;
     }
 
-    .privacy-divider {
-      margin: 35px auto;
+    .privacy-note {
+      max-width: 700px;
 
-      color: #45515d;
+      margin: 35px auto 0;
 
-      font-size: 20px;
-    }
-
-    .privacy-result {
-      max-width: 610px;
-
-      margin: 0 auto;
-
-      padding: 27px;
+      padding: 25px;
 
       border:
         1px solid var(--green-border);
@@ -723,20 +871,20 @@
         var(--green-soft);
     }
 
-    .privacy-result strong {
+    .privacy-note strong {
       display: block;
 
-      color: #d1fae5;
+      color: #d5f8e8;
 
-      font-size: 16px;
+      font-size: 15px;
 
-      margin-bottom: 8px;
+      margin-bottom: 7px;
     }
 
-    .privacy-result span {
+    .privacy-note span {
       color: #8cae9f;
 
-      font-size: 13px;
+      font-size: 12px;
 
       line-height: 1.6;
     }
@@ -750,29 +898,29 @@
 
       margin: 0 auto;
 
-      padding: 110px 0 125px;
+      padding: 115px 0 125px;
 
       text-align: center;
     }
 
     .final-logo {
-      width: 72px;
-      height: 72px;
+      width: 70px;
+      height: 70px;
+
+      display: block;
 
       object-fit: contain;
 
-      margin: 0 auto 28px;
-
-      display: block;
+      margin: 0 auto 27px;
     }
 
     .final-section h2 {
-      max-width: 700px;
+      max-width: 750px;
 
       margin: 0 auto;
 
       font-size:
-        clamp(34px, 5vw, 54px);
+        clamp(34px, 5vw, 56px);
 
       line-height: 1.05;
 
@@ -780,7 +928,7 @@
     }
 
     .final-section p {
-      max-width: 600px;
+      max-width: 620px;
 
       margin: 20px auto 0;
 
@@ -788,7 +936,7 @@
 
       font-size: 15px;
 
-      line-height: 1.7;
+      line-height: 1.75;
     }
 
     /* =========================================================
@@ -813,7 +961,7 @@
 
       justify-content: space-between;
 
-      color: #667382;
+      color: #687583;
 
       font-size: 12px;
     }
@@ -828,27 +976,24 @@
        RESPONSIVE
     ========================================================= */
 
-    @media (max-width: 900px) {
+    @media (max-width: 950px) {
 
-      .value-grid {
-        grid-template-columns: 1fr;
+      .privacy-grid {
+        grid-template-columns:
+          repeat(3, 1fr);
       }
 
-      .commitment-content {
+      .backup-grid,
+      .commitment-grid {
         grid-template-columns: 1fr;
 
         gap: 45px;
       }
 
-      .privacy-grid {
-        grid-template-columns:
-          repeat(2, 1fr);
-      }
-
       .workflow {
         flex-wrap: wrap;
 
-        gap: 25px;
+        gap: 35px 10px;
       }
 
       .workflow-arrow {
@@ -856,15 +1001,13 @@
       }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
 
       nav {
-        width: 90%;
-
-        height: 78px;
+        width: 88%;
       }
 
-      .brand img {
+      .brand-logo {
         width: 43px;
         height: 43px;
       }
@@ -873,7 +1016,7 @@
         font-size: 19px;
       }
 
-      .brand-tagline {
+      .brand-description {
         display: none;
       }
 
@@ -881,14 +1024,12 @@
         width: 88%;
 
         padding:
-          70px 0 85px;
+          70px 0 90px;
       }
 
       .hero-logo {
         width: 78px;
         height: 78px;
-
-        margin-bottom: 25px;
       }
 
       .hero h1 {
@@ -897,8 +1038,6 @@
 
       .hero-description {
         font-size: 15px;
-
-        line-height: 1.7;
       }
 
       .section {
@@ -911,10 +1050,24 @@
         letter-spacing: -1.5px;
       }
 
-      .value-card {
-        padding: 25px;
+      .ownership-grid {
+        grid-template-columns: 1fr;
 
+        margin-top: 40px;
+      }
+
+      .ownership-card {
         min-height: 0;
+
+        padding: 25px;
+      }
+
+      .backup-panel {
+        padding: 20px;
+      }
+
+      .backup-options {
+        grid-template-columns: 1fr;
       }
 
       .workflow {
@@ -933,29 +1086,25 @@
       }
 
       .commitment-panel {
-        padding: 22px;
+        padding: 21px;
       }
 
       .privacy-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns:
+          repeat(2, 1fr);
 
         gap: 9px;
       }
 
       .privacy-item {
-        padding: 22px 12px;
+        padding: 21px 12px;
       }
 
       .final-section {
         width: 88%;
 
         padding:
-          85px 0 95px;
-      }
-
-      .final-logo {
-        width: 62px;
-        height: 62px;
+          90px 0 100px;
       }
 
       .footer-inner {
@@ -975,11 +1124,13 @@
   </style>
 </head>
 
+
 <body>
 
-  <!-- =========================================================
+
+  <!-- =======================================================
        NAVIGATION
-  ========================================================== -->
+  ======================================================== -->
 
   <nav>
 
@@ -988,6 +1139,7 @@
       <img
         src="logo.png"
         alt="Peti logo"
+        class="brand-logo"
       >
 
       <span class="brand-name">
@@ -996,7 +1148,7 @@
 
     </a>
 
-    <span class="brand-tagline">
+    <span class="brand-description">
       Private Money Ledger
     </span>
 
@@ -1005,9 +1157,10 @@
 
   <main>
 
-    <!-- =======================================================
+
+    <!-- =====================================================
          HERO
-    ======================================================== -->
+    ====================================================== -->
 
     <section class="hero">
 
@@ -1018,128 +1171,161 @@
       >
 
       <div class="eyebrow">
+
         <span class="eyebrow-dot"></span>
+
         Local-first personal finance
+
       </div>
 
+
       <h1>
-        Your financial life.<br>
-        <span>Without the financial account.</span>
+        Your money.<br>
+        <span>Kept yours.</span>
       </h1>
 
+
       <p class="hero-description">
-        Peti is a local-first personal finance ledger designed to keep
-        your financial records on your device —
-        without an account, cloud financial ledger,
-        bank credentials, or cloud AI.
+
+        Peti is a local-first personal finance ledger designed
+        to keep your financial records <strong>encrypted on your device</strong>,
+        with your data under your control — not dependent on
+        a cloud financial account.
+
       </p>
+
+
+      <p class="hero-support">
+        Capture privately. Confirm confidently. Keep your ledger yours.
+      </p>
+
 
       <a
         href="#"
         class="cta"
       >
+
         Join the Early Access Telegram
-        <span class="cta-arrow">→</span>
+
+        <span class="cta-arrow">
+          →
+        </span>
+
       </a>
 
     </section>
 
 
-    <!-- =======================================================
-         WHY PETI
-    ======================================================== -->
+    <!-- =====================================================
+         OWNERSHIP
+    ====================================================== -->
 
-    <section class="section value-section">
+    <section class="section section-border">
 
       <div class="section-label">
-        Why Peti
+        A different approach
       </div>
 
+
       <h2 class="section-title">
-        Finance without handing over your financial life.
+        A private ledger you can actually control.
       </h2>
 
+
       <p class="section-description">
-        Most financial software is built around an account somewhere.
-        Peti takes a different approach: your ledger is created,
-        encrypted, and maintained on your device.
+
+        Your financial records shouldn't need to live in someone
+        else's financial database just to be useful. Peti keeps
+        your ledger local and encrypted, while giving you the
+        tools to back it up and export it when you choose.
+
       </p>
 
 
-      <div class="value-grid">
+      <div class="ownership-grid">
 
 
-        <article class="value-card">
+        <article class="ownership-card">
 
-          <div class="value-number">
-            01
+          <div class="card-icon">
+            ◈
           </div>
 
           <h3>
-            No Account Required
+            Your Ledger, On Your Device
           </h3>
 
           <p>
-            Your personal ledger does not depend on a Peti account.
-            Open the app and manage your finances without creating
-            an online identity.
+
+            Your confirmed financial records are stored locally
+            in an encrypted database on your device. Peti does
+            not require a cloud-hosted ledger to keep your
+            finances available to you.
+
           </p>
 
         </article>
 
 
-        <article class="value-card">
+        <article class="ownership-card">
 
-          <div class="value-number">
-            02
+          <div class="card-icon">
+            ◆
           </div>
 
           <h3>
-            Local-First Ledger
+            You Stay in Control
           </h3>
 
           <p>
-            Your financial records remain on your device in an
-            encrypted local database. Peti does not require a
-            cloud-hosted financial ledger.
+
+            Peti gives you control over your financial data,
+            including backup and export. Your records aren't
+            locked inside an online account that only Peti
+            can access.
+
           </p>
 
         </article>
 
 
-        <article class="value-card">
+        <article class="ownership-card">
 
-          <div class="value-number">
-            03
+          <div class="card-icon">
+            +
           </div>
 
           <h3>
-            Capture Before Commit
+            Review Before Recording
           </h3>
 
           <p>
-            Peti can turn transaction information from supported
-            sources into drafts. Review and confirm before anything
-            becomes part of your ledger.
+
+            Financial information can arrive as a draft before
+            it becomes part of your ledger. Review the details,
+            make corrections, and confirm when you're ready.
+
           </p>
 
         </article>
 
 
-        <article class="value-card">
+        <article class="ownership-card">
 
-          <div class="value-number">
-            04
+          <div class="card-icon">
+            ◇
           </div>
 
           <h3>
-            No Bank Credentials
+            Private by Design
           </h3>
 
           <p>
-            Peti is designed without requiring direct bank credentials
-            or bank-server access to maintain your personal
-            financial record.
+
+            Peti is designed without requiring bank credentials
+            or a remote financial account to maintain your
+            personal ledger.
+
           </p>
 
         </article>
@@ -1150,23 +1336,141 @@
     </section>
 
 
-    <!-- =======================================================
+    <!-- =====================================================
+         LOCAL DOESN'T MEAN LOCKED
+    ====================================================== -->
+
+    <section class="section backup-section">
+
+      <div class="backup-grid">
+
+
+        <div class="backup-copy">
+
+          <div class="section-label">
+            Your data, your control
+          </div>
+
+
+          <h2 class="section-title">
+            Local doesn't mean locked to one device.
+          </h2>
+
+
+          <p>
+
+            Your ledger stays local by default. When you need
+            another copy, Peti gives you control over how your
+            data is backed up and exported.
+
+          </p>
+
+
+          <p>
+
+            Your financial records don't depend on Peti keeping
+            a remote copy of your ledger for you.
+
+          </p>
+
+        </div>
+
+
+        <div class="backup-panel">
+
+
+          <div class="device-box">
+
+            <div class="device-icon">
+              🔐
+            </div>
+
+            <strong>
+              Your encrypted local ledger
+            </strong>
+
+            <span>
+              Stored on your device
+            </span>
+
+          </div>
+
+
+          <div class="backup-arrows">
+
+            <span>
+              ↓
+            </span>
+
+            <span>
+              ↓
+            </span>
+
+          </div>
+
+
+          <div class="backup-options">
+
+
+            <div class="backup-option">
+
+              <strong>
+                Backup
+              </strong>
+
+              <span>
+                Keep a copy of your ledger
+                under your control.
+              </span>
+
+            </div>
+
+
+            <div class="backup-option">
+
+              <strong>
+                Export
+              </strong>
+
+              <span>
+                Take your financial records
+                with you in a usable format.
+              </span>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
          WORKFLOW
-    ======================================================== -->
+    ====================================================== -->
 
     <section class="section workflow-section">
 
       <div class="section-label">
-        The Peti model
+        How Peti works
       </div>
+
 
       <h2 class="section-title">
         Capture. Confirm. Understand.
       </h2>
 
+
       <p class="section-description">
-        Peti separates detecting financial information from actually
-        recording it. You remain the final authority over your ledger.
+
+        Peti separates detecting financial information from
+        actually recording it. You remain the final authority
+        over your ledger.
+
       </p>
 
 
@@ -1228,7 +1532,7 @@
           </h3>
 
           <p>
-            Decide whether it becomes a record.
+            Decide what becomes a record.
           </p>
 
         </div>
@@ -1283,13 +1587,13 @@
     </section>
 
 
-    <!-- =======================================================
+    <!-- =====================================================
          RECURRING COMMITMENTS
-    ======================================================== -->
+    ====================================================== -->
 
     <section class="section commitment-section">
 
-      <div class="commitment-content">
+      <div class="commitment-grid">
 
 
         <div class="commitment-copy">
@@ -1298,19 +1602,27 @@
             Recurring commitments
           </div>
 
+
           <h2 class="section-title">
             Know what's coming before it happens.
           </h2>
 
-          <p>
-            Recurring expenses should not become visible only after
-            the money has already left your account.
-          </p>
 
           <p>
-            Peti keeps recurring commitments visible and can provide
-            advance awareness around scheduled automatic deductions,
-            giving you time to review them before they occur.
+
+            Recurring expenses shouldn't become visible only
+            after the money has already left.
+
+          </p>
+
+
+          <p>
+
+            Peti keeps recurring commitments visible and can
+            provide advance awareness around scheduled
+            automatic deductions, giving you time to review
+            them before they occur.
+
           </p>
 
         </div>
@@ -1318,24 +1630,27 @@
 
         <div class="commitment-panel">
 
-          <div class="commitment-header">
 
-            <span>
+          <div class="panel-heading">
+
+            <strong>
               Upcoming commitments
-            </span>
+            </strong>
 
-            <span>
-              PRIVATE
+            <span class="panel-status">
+              LOCAL
             </span>
 
           </div>
 
 
-          <div class="commitment-item">
+          <div class="commitment">
 
-            <div class="commitment-icon">
+
+            <div class="commitment-symbol">
               ↻
             </div>
+
 
             <div class="commitment-info">
 
@@ -1349,7 +1664,8 @@
 
             </div>
 
-            <div class="commitment-amount">
+
+            <div class="commitment-value">
 
               <strong>
                 ₹499
@@ -1361,14 +1677,17 @@
 
             </div>
 
+
           </div>
 
 
-          <div class="commitment-item">
+          <div class="commitment">
 
-            <div class="commitment-icon">
+
+            <div class="commitment-symbol">
               ↻
             </div>
+
 
             <div class="commitment-info">
 
@@ -1382,7 +1701,8 @@
 
             </div>
 
-            <div class="commitment-amount">
+
+            <div class="commitment-value">
 
               <strong>
                 ₹799
@@ -1394,14 +1714,17 @@
 
             </div>
 
+
           </div>
 
 
-          <div class="commitment-item">
+          <div class="commitment">
 
-            <div class="commitment-icon">
+
+            <div class="commitment-symbol">
               ↻
             </div>
+
 
             <div class="commitment-info">
 
@@ -1415,7 +1738,8 @@
 
             </div>
 
-            <div class="commitment-amount">
+
+            <div class="commitment-value">
 
               <strong>
                 ₹1,299
@@ -1427,6 +1751,7 @@
 
             </div>
 
+
           </div>
 
 
@@ -1437,9 +1762,9 @@
     </section>
 
 
-    <!-- =======================================================
-         PRIVACY
-    ======================================================== -->
+    <!-- =====================================================
+         PRIVACY ARCHITECTURE
+    ====================================================== -->
 
     <section class="section privacy-section">
 
@@ -1447,13 +1772,18 @@
         Privacy by architecture
       </div>
 
+
       <h2 class="section-title">
-        Peti doesn't need to know you.
+        Privacy starts with where your ledger lives.
       </h2>
 
+
       <p class="section-description">
-        The product is designed around keeping the financial ledger
-        close to the person who owns it.
+
+        Peti is designed so your personal financial records can
+        remain on your device rather than becoming part of a
+        remote financial database.
+
       </p>
 
 
@@ -1462,12 +1792,12 @@
 
         <div class="privacy-item">
 
-          <div class="privacy-icon">
-            ◇
+          <div class="privacy-symbol">
+            ◈
           </div>
 
           <strong>
-            No account
+            Encrypted local storage
           </strong>
 
         </div>
@@ -1475,12 +1805,12 @@
 
         <div class="privacy-item">
 
-          <div class="privacy-icon">
+          <div class="privacy-symbol">
             ◇
           </div>
 
           <strong>
-            No cloud financial ledger
+            App lock
           </strong>
 
         </div>
@@ -1488,12 +1818,12 @@
 
         <div class="privacy-item">
 
-          <div class="privacy-icon">
-            ◇
+          <div class="privacy-symbol">
+            ↓
           </div>
 
           <strong>
-            No bank credentials
+            Controlled backup
           </strong>
 
         </div>
@@ -1501,12 +1831,25 @@
 
         <div class="privacy-item">
 
-          <div class="privacy-icon">
-            ◇
+          <div class="privacy-symbol">
+            ↗
           </div>
 
           <strong>
-            No cloud AI
+            Data export
+          </strong>
+
+        </div>
+
+
+        <div class="privacy-item">
+
+          <div class="privacy-symbol">
+            +
+          </div>
+
+          <strong>
+            No bank credentials required
           </strong>
 
         </div>
@@ -1515,20 +1858,18 @@
       </div>
 
 
-      <div class="privacy-divider">
-        ↓
-      </div>
-
-
-      <div class="privacy-result">
+      <div class="privacy-note">
 
         <strong>
-          Encrypted local data · App lock · User-controlled backup · CSV export
+          Your financial records are yours.
         </strong>
 
         <span>
-          Your financial records remain under your control,
-          with the tools to protect, back up, and export them.
+
+          Peti is built around keeping your financial data
+          under your control — with local storage, protection,
+          backup, and export built into the product model.
+
         </span>
 
       </div>
@@ -1536,9 +1877,9 @@
     </section>
 
 
-    <!-- =======================================================
+    <!-- =====================================================
          FINAL CTA
-    ======================================================== -->
+    ====================================================== -->
 
     <section class="final-section">
 
@@ -1548,25 +1889,36 @@
         class="final-logo"
       >
 
+
       <h2>
-        Your financial records are yours.
+        Personal finance should feel personal.
       </h2>
 
+
       <p>
-        Peti is being built around a simple principle:
-        personal finance should not require surrendering
-        your financial identity to a platform.
+
+        Peti gives you the tools to manage your financial
+        records on your terms — privately, locally,
+        and with control over your own data.
+
       </p>
+
 
       <a
         href="#"
         class="cta"
       >
+
         Join the Early Access Telegram
-        <span class="cta-arrow">→</span>
+
+        <span class="cta-arrow">
+          →
+        </span>
+
       </a>
 
     </section>
+
 
   </main>
 
@@ -1590,6 +1942,7 @@
     </div>
 
   </footer>
+
 
 </body>
 </html>
