@@ -2443,6 +2443,627 @@ footer{
     transition-duration:.001ms !important;
   }
 }
+   /* =========================================================
+   PETI — PREMIUM MOTION ENHANCEMENT
+   Keeps existing design intact
+   ========================================================= */
+
+/* ---------- Smooth section depth ---------- */
+
+section {
+  isolation: isolate;
+}
+
+section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(
+      circle at var(--section-x, 50%) var(--section-y, 50%),
+      rgba(16, 185, 129, 0.035),
+      transparent 34%
+    );
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+
+section.in-view::after {
+  opacity: 1;
+}
+
+
+/* ---------- Premium card depth ---------- */
+
+.feature-card,
+.ledger-panel,
+.control-card,
+.preview-window,
+.commitment-card,
+.privacy-card,
+.workflow-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.feature-card::before,
+.ledger-panel::before,
+.preview-window::before,
+.commitment-card::before,
+.privacy-card::before {
+  transition:
+    opacity .45s ease,
+    transform .45s ease;
+}
+
+
+/* ---------- Moving light across large panels ---------- */
+
+.ledger-panel,
+.preview-window,
+.workflow-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.ledger-panel::after,
+.preview-window::after,
+.workflow-card::after {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: -35%;
+  width: 35%;
+  height: 180%;
+  transform: rotate(18deg);
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.045),
+      transparent
+    );
+  pointer-events: none;
+  animation: petiPanelLight 9s ease-in-out infinite;
+}
+
+@keyframes petiPanelLight {
+  0%,
+  55% {
+    left: -40%;
+    opacity: 0;
+  }
+
+  65% {
+    opacity: 1;
+  }
+
+  85% {
+    left: 125%;
+    opacity: 0;
+  }
+
+  100% {
+    left: 125%;
+    opacity: 0;
+  }
+}
+
+
+/* =========================================================
+   CAPTURE → DRAFT → CONFIRM → LEDGER → UNDERSTAND
+   ========================================================= */
+
+.flow {
+  position: relative;
+}
+
+.flow-step {
+  position: relative;
+  z-index: 2;
+  transition:
+    transform .55s cubic-bezier(.22,1,.36,1),
+    border-color .45s ease,
+    background .45s ease,
+    box-shadow .45s ease;
+}
+
+.flow-step.active {
+  transform: translateY(-9px) scale(1.025);
+  border-color: rgba(245,184,46,.48);
+  background:
+    radial-gradient(
+      circle at 50% 0,
+      rgba(245,184,46,.09),
+      transparent 65%
+    ),
+    rgba(255,255,255,.025);
+
+  box-shadow:
+    0 18px 50px rgba(0,0,0,.28),
+    0 0 32px rgba(245,184,46,.08);
+}
+
+.flow-step.active .flow-number {
+  color: #fff;
+  border-color: rgba(245,184,46,.75);
+  background:
+    radial-gradient(
+      circle,
+      rgba(245,184,46,.22),
+      rgba(245,184,46,.05)
+    );
+
+  box-shadow:
+    0 0 0 7px rgba(245,184,46,.025),
+    0 0 30px rgba(245,184,46,.18);
+
+  animation: flowPulse 1.7s ease-in-out infinite;
+}
+
+@keyframes flowPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 5px rgba(245,184,46,.02),
+      0 0 18px rgba(245,184,46,.10);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 11px rgba(245,184,46,.025),
+      0 0 34px rgba(245,184,46,.22);
+  }
+}
+
+
+/* animated travelling line */
+
+.flow-track {
+  position: absolute;
+  top: 45px;
+  left: 9%;
+  right: 9%;
+  height: 2px;
+  overflow: hidden;
+  z-index: 0;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(245,184,46,.13),
+      transparent
+    );
+}
+
+.flow-track::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -12%;
+  width: 12%;
+  height: 4px;
+  border-radius: 999px;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #f5b82e,
+      #ffd76a,
+      transparent
+    );
+
+  box-shadow:
+    0 0 15px rgba(245,184,46,.6);
+
+  animation: flowTravel 4.8s linear infinite;
+}
+
+@keyframes flowTravel {
+  0% {
+    left: -12%;
+  }
+
+  100% {
+    left: 110%;
+  }
+}
+
+
+/* ---------- Journey cards ---------- */
+
+.journey-card {
+  transition:
+    transform .55s cubic-bezier(.22,1,.36,1),
+    border-color .4s ease,
+    box-shadow .4s ease,
+    background .4s ease;
+}
+
+.journey-card.journey-active {
+  border-color: rgba(16,185,129,.42);
+
+  background:
+    radial-gradient(
+      circle at 50% 0,
+      rgba(16,185,129,.10),
+      transparent 70%
+    ),
+    rgba(13,20,30,.9);
+
+  box-shadow:
+    0 25px 65px rgba(0,0,0,.35),
+    0 0 38px rgba(16,185,129,.09);
+
+  z-index: 10;
+}
+
+.journey-center {
+  transition:
+    box-shadow .5s ease,
+    transform .5s cubic-bezier(.22,1,.36,1);
+}
+
+.journey-center.journey-active {
+  box-shadow:
+    0 0 0 10px rgba(16,185,129,.025),
+    0 0 70px rgba(16,185,129,.18),
+    inset 0 0 40px rgba(16,185,129,.12);
+}
+
+
+/* ---------- Moving journey particle ---------- */
+
+.journey-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow:
+    0 0 10px #10b981,
+    0 0 25px rgba(16,185,129,.65);
+  z-index: 8;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.journey-particle.run {
+  animation: journeyParticle 4.8s linear forwards;
+}
+
+@keyframes journeyParticle {
+  0% {
+    left: 15%;
+    top: 31%;
+    opacity: 0;
+  }
+
+  7% {
+    opacity: 1;
+  }
+
+  24% {
+    left: 45%;
+    top: 31%;
+    opacity: 1;
+  }
+
+  50% {
+    left: 50%;
+    top: 50%;
+    opacity: 1;
+  }
+
+  76% {
+    left: 55%;
+    top: 69%;
+    opacity: 1;
+  }
+
+  93% {
+    left: 85%;
+    top: 69%;
+    opacity: 1;
+  }
+
+  100% {
+    left: 88%;
+    top: 69%;
+    opacity: 0;
+  }
+}
+
+
+/* =========================================================
+   RECURRING COMMITMENTS
+   ========================================================= */
+
+.commitment-card,
+.commitment {
+  transition:
+    transform .6s cubic-bezier(.22,1,.36,1),
+    border-color .4s ease,
+    box-shadow .4s ease;
+}
+
+.commitment-card.commitment-active,
+.commitment.commitment-active {
+  border-color: rgba(245,184,46,.34);
+
+  box-shadow:
+    0 25px 60px rgba(0,0,0,.34),
+    0 0 35px rgba(245,184,46,.055);
+}
+
+.commitment-progress span {
+  position: relative;
+  overflow: hidden;
+}
+
+.commitment-progress span::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.45),
+      transparent
+    );
+  animation: commitmentShine 3.5s ease-in-out infinite;
+}
+
+@keyframes commitmentShine {
+  0% {
+    transform: translateX(-150%);
+  }
+
+  45%,
+  100% {
+    transform: translateX(300%);
+  }
+}
+
+
+/* =========================================================
+   PRIVACY ARCHITECTURE
+   ========================================================= */
+
+.privacy-map {
+  perspective: 1000px;
+}
+
+.privacy-core {
+  animation:
+    privacyCoreFloat 5s ease-in-out infinite;
+}
+
+@keyframes privacyCoreFloat {
+  0%,
+  100% {
+    transform: translate(-50%,-50%) scale(1);
+  }
+
+  50% {
+    transform: translate(-50%,-50%) scale(1.035);
+  }
+}
+
+.privacy-node {
+  transition:
+    transform .5s cubic-bezier(.22,1,.36,1),
+    border-color .4s ease,
+    box-shadow .4s ease;
+}
+
+.privacy-node.privacy-active {
+  border-color: rgba(16,185,129,.48);
+
+  box-shadow:
+    0 18px 45px rgba(0,0,0,.35),
+    0 0 35px rgba(16,185,129,.11);
+
+  z-index: 8;
+}
+
+
+/* glowing travelling privacy particle */
+
+.privacy-particle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #10b981;
+
+  box-shadow:
+    0 0 8px #10b981,
+    0 0 20px rgba(16,185,129,.8);
+
+  pointer-events: none;
+  z-index: 7;
+}
+
+.privacy-particle.run {
+  animation:
+    privacyOrbit 6s linear infinite;
+}
+
+@keyframes privacyOrbit {
+
+  0% {
+    left: 50%;
+    top: 15%;
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  25% {
+    left: 85%;
+    top: 50%;
+  }
+
+  50% {
+    left: 50%;
+    top: 85%;
+  }
+
+  75% {
+    left: 15%;
+    top: 50%;
+  }
+
+  95% {
+    left: 50%;
+    top: 15%;
+    opacity: 1;
+  }
+
+  100% {
+    left: 50%;
+    top: 15%;
+    opacity: 0;
+  }
+}
+
+
+/* =========================================================
+   PRODUCT PREVIEW
+   ========================================================= */
+
+.preview-window {
+  transition:
+    transform .6s cubic-bezier(.22,1,.36,1),
+    border-color .4s ease,
+    box-shadow .4s ease;
+}
+
+.preview-window.preview-changing {
+  animation: previewChange .55s cubic-bezier(.22,1,.36,1);
+}
+
+@keyframes previewChange {
+  0% {
+    opacity: .72;
+    transform: translateY(8px) scale(.992);
+  }
+
+  55% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.002);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.preview-tab {
+  position: relative;
+  overflow: hidden;
+}
+
+.preview-tab::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: #f5b82e;
+  box-shadow: 0 0 10px rgba(245,184,46,.4);
+  transform: translateX(-50%);
+  transition: width .35s ease;
+}
+
+.preview-tab.active::after {
+  width: 45%;
+}
+
+
+/* =========================================================
+   MOUSE GLOW
+   ========================================================= */
+
+.mouse-glow {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(16,185,129,.055),
+      transparent 68%
+    );
+
+  transform:
+    translate(-50%,-50%);
+
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+
+body.mouse-active .mouse-glow {
+  opacity: 1;
+}
+
+
+/* =========================================================
+   MOBILE SAFETY
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .flow-track {
+    display: none;
+  }
+
+  .journey-particle {
+    display: none;
+  }
+
+  .privacy-particle {
+    display: none;
+  }
+
+  .mouse-glow {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .flow-step.active,
+  .privacy-core,
+  .commitment-card.commitment-active,
+  .commitment.commitment-active {
+    animation: none !important;
+  }
+
+  .journey-particle,
+  .privacy-particle,
+  .flow-track::after {
+    display: none !important;
+  }
+}
 </style>
 </head>
 
@@ -4120,6 +4741,667 @@ window.addEventListener("scroll", () => {
 },{
   passive:true
 });
+   /* =========================================================
+   PETI — PREMIUM INTERACTION LAYER
+   ========================================================= */
+
+(() => {
+
+  const reduceMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+
+  /* =======================================================
+     MOUSE GLOW
+     ======================================================= */
+
+  if (!reduceMotion && window.innerWidth > 700) {
+
+    const glow = document.createElement("div");
+
+    glow.className = "mouse-glow";
+
+    document.body.appendChild(glow);
+
+    let glowX = window.innerWidth / 2;
+    let glowY = window.innerHeight / 2;
+
+    let targetX = glowX;
+    let targetY = glowY;
+
+    window.addEventListener("mousemove", e => {
+
+      targetX = e.clientX;
+      targetY = e.clientY;
+
+      document.body.classList.add("mouse-active");
+
+    }, { passive: true });
+
+    window.addEventListener("mouseleave", () => {
+
+      document.body.classList.remove("mouse-active");
+
+    });
+
+    function animateGlow() {
+
+      glowX += (targetX - glowX) * .12;
+      glowY += (targetY - glowY) * .12;
+
+      glow.style.left = `${glowX}px`;
+      glow.style.top = `${glowY}px`;
+
+      requestAnimationFrame(animateGlow);
+
+    }
+
+    animateGlow();
+
+  }
+
+
+  /* =======================================================
+     SECTION MOUSE POSITION
+     ======================================================= */
+
+  if (!reduceMotion) {
+
+    document.querySelectorAll("section").forEach(section => {
+
+      section.addEventListener("mousemove", e => {
+
+        const rect =
+          section.getBoundingClientRect();
+
+        const x =
+          ((e.clientX - rect.left) / rect.width) * 100;
+
+        const y =
+          ((e.clientY - rect.top) / rect.height) * 100;
+
+        section.style.setProperty(
+          "--section-x",
+          `${x}%`
+        );
+
+        section.style.setProperty(
+          "--section-y",
+          `${y}%`
+        );
+
+      }, { passive: true });
+
+    });
+
+  }
+
+
+  /* =======================================================
+     SECTION IN VIEW
+     ======================================================= */
+
+  const sections =
+    document.querySelectorAll("section");
+
+  const sectionObserver =
+    new IntersectionObserver(
+      entries => {
+
+        entries.forEach(entry => {
+
+          if (entry.isIntersecting) {
+
+            entry.target.classList.add("in-view");
+
+          }
+
+        });
+
+      },
+      {
+        threshold: .16
+      }
+    );
+
+  sections.forEach(
+    section => sectionObserver.observe(section)
+  );
+
+
+  /* =======================================================
+     PREMIUM CARD TILT
+     ======================================================= */
+
+  if (!reduceMotion && window.innerWidth > 900) {
+
+    const cards = document.querySelectorAll(
+      ".feature-card, " +
+      ".ledger-panel, " +
+      ".preview-window, " +
+      ".commitment-card, " +
+      ".commitment, " +
+      ".control-card, " +
+      ".privacy-node"
+    );
+
+    cards.forEach(card => {
+
+      card.addEventListener("mousemove", e => {
+
+        const rect =
+          card.getBoundingClientRect();
+
+        const px =
+          (e.clientX - rect.left) / rect.width;
+
+        const py =
+          (e.clientY - rect.top) / rect.height;
+
+        const rotateX =
+          (0.5 - py) * 3;
+
+        const rotateY =
+          (px - 0.5) * 4;
+
+        card.style.transform =
+          `perspective(1000px)
+           rotateX(${rotateX}deg)
+           rotateY(${rotateY}deg)
+           translateY(-5px)`;
+
+      });
+
+      card.addEventListener("mouseleave", () => {
+
+        card.style.transform = "";
+
+      });
+
+    });
+
+  }
+
+
+  /* =======================================================
+     FLOW SYSTEM
+     ======================================================= */
+
+  const flow =
+    document.querySelector(".flow");
+
+  const flowSteps =
+    document.querySelectorAll(".flow-step");
+
+  if (flow && flowSteps.length) {
+
+    /* Add moving track */
+
+    if (!flow.querySelector(".flow-track")) {
+
+      const track =
+        document.createElement("div");
+
+      track.className = "flow-track";
+
+      flow.prepend(track);
+
+    }
+
+    let current = 0;
+
+    const activateFlow = index => {
+
+      flowSteps.forEach((step, i) => {
+
+        step.classList.toggle(
+          "active",
+          i === index
+        );
+
+      });
+
+    };
+
+    activateFlow(0);
+
+    if (!reduceMotion) {
+
+      setInterval(() => {
+
+        current =
+          (current + 1) % flowSteps.length;
+
+        activateFlow(current);
+
+      }, 1900);
+
+    }
+
+  }
+
+
+  /* =======================================================
+     JOURNEY PARTICLE
+     ======================================================= */
+
+  const journey =
+    document.querySelector(".journey-shell");
+
+  if (journey && !reduceMotion) {
+
+    const particle =
+      document.createElement("div");
+
+    particle.className =
+      "journey-particle";
+
+    journey.appendChild(particle);
+
+    function runJourneyParticle() {
+
+      particle.classList.remove("run");
+
+      /*
+       * Force browser to restart animation.
+       */
+      void particle.offsetWidth;
+
+      particle.classList.add("run");
+
+    }
+
+    runJourneyParticle();
+
+    setInterval(
+      runJourneyParticle,
+      5200
+    );
+
+  }
+
+
+  /* =======================================================
+     JOURNEY CARD SEQUENCE
+     ======================================================= */
+
+  const journeyCards =
+    document.querySelectorAll(
+      ".journey-card"
+    );
+
+  const journeyCenter =
+    document.querySelector(
+      ".journey-center"
+    );
+
+  if (journeyCards.length) {
+
+    let journeyIndex = 0;
+
+    const highlightJourney =
+      index => {
+
+        journeyCards.forEach(card => {
+
+          card.classList.remove(
+            "journey-active"
+          );
+
+        });
+
+        if (journeyCenter) {
+
+          journeyCenter.classList.remove(
+            "journey-active"
+          );
+
+        }
+
+        const active =
+          journeyCards[index];
+
+        if (active) {
+
+          active.classList.add(
+            "journey-active"
+          );
+
+        }
+
+        /*
+         * Briefly highlight center between
+         * the transaction stages.
+         */
+        if (index === 1 || index === 2) {
+
+          if (journeyCenter) {
+
+            journeyCenter.classList.add(
+              "journey-active"
+            );
+
+          }
+
+        }
+
+      };
+
+    highlightJourney(0);
+
+    if (!reduceMotion) {
+
+      setInterval(() => {
+
+        journeyIndex =
+          (journeyIndex + 1)
+          % journeyCards.length;
+
+        highlightJourney(
+          journeyIndex
+        );
+
+      }, 2200);
+
+    }
+
+  }
+
+
+  /* =======================================================
+     RECURRING COMMITMENT SEQUENCE
+     ======================================================= */
+
+  const commitments =
+    document.querySelectorAll(
+      ".commitment-card, .commitment"
+    );
+
+  if (
+    commitments.length &&
+    !reduceMotion
+  ) {
+
+    let index = 0;
+
+    setInterval(() => {
+
+      commitments.forEach(
+        card =>
+          card.classList.remove(
+            "commitment-active"
+          )
+      );
+
+      commitments[index]
+        ?.classList.add(
+          "commitment-active"
+        );
+
+      index =
+        (index + 1)
+        % commitments.length;
+
+    }, 2400);
+
+  }
+
+
+  /* =======================================================
+     PRIVACY ARCHITECTURE PARTICLE
+     ======================================================= */
+
+  const privacyMap =
+    document.querySelector(
+      ".privacy-map"
+    );
+
+  if (
+    privacyMap &&
+    !reduceMotion
+  ) {
+
+    const particle =
+      document.createElement("div");
+
+    particle.className =
+      "privacy-particle run";
+
+    privacyMap.appendChild(
+      particle
+    );
+
+  }
+
+
+  /* =======================================================
+     PRIVACY NODE SEQUENCE
+     ======================================================= */
+
+  const privacyNodes =
+    document.querySelectorAll(
+      ".privacy-node"
+    );
+
+  if (
+    privacyNodes.length &&
+    !reduceMotion
+  ) {
+
+    let nodeIndex = 0;
+
+    setInterval(() => {
+
+      privacyNodes.forEach(node => {
+
+        node.classList.remove(
+          "privacy-active"
+        );
+
+      });
+
+      privacyNodes[nodeIndex]
+        ?.classList.add(
+          "privacy-active"
+        );
+
+      nodeIndex =
+        (nodeIndex + 1)
+        % privacyNodes.length;
+
+    }, 1500);
+
+  }
+
+
+  /* =======================================================
+     PRODUCT PREVIEW TABS
+     ======================================================= */
+
+  const previewWindow =
+    document.querySelector(
+      ".preview-window"
+    );
+
+  const previewTabs =
+    document.querySelectorAll(
+      ".preview-tab"
+    );
+
+  if (previewWindow && previewTabs.length) {
+
+    previewTabs.forEach(tab => {
+
+      tab.addEventListener(
+        "click",
+        () => {
+
+          previewWindow.classList.remove(
+            "preview-changing"
+          );
+
+          /*
+           * Restart transition.
+           */
+          void previewWindow.offsetWidth;
+
+          previewWindow.classList.add(
+            "preview-changing"
+          );
+
+        }
+      );
+
+    });
+
+  }
+
+
+  /* =======================================================
+     BUTTON MAGNETIC MICRO-MOTION
+     ======================================================= */
+
+  if (
+    !reduceMotion &&
+    window.innerWidth > 900
+  ) {
+
+    document.querySelectorAll(
+      ".btn, .nav-cta, .preview-tab"
+    ).forEach(button => {
+
+      button.addEventListener(
+        "mousemove",
+        e => {
+
+          const rect =
+            button.getBoundingClientRect();
+
+          const x =
+            e.clientX - rect.left
+            - rect.width / 2;
+
+          const y =
+            e.clientY - rect.top
+            - rect.height / 2;
+
+          button.style.transform =
+            `translate(
+              ${x * .045}px,
+              ${y * .045}px
+            )`;
+
+        }
+      );
+
+      button.addEventListener(
+        "mouseleave",
+        () => {
+
+          button.style.transform = "";
+
+        }
+      );
+
+    });
+
+  }
+
+
+  /* =======================================================
+     SCROLL VELOCITY → SUBTLE AMBIENT DEPTH
+     ======================================================= */
+
+  if (!reduceMotion) {
+
+    let lastScroll =
+      window.scrollY;
+
+    let scrollVelocity = 0;
+
+    window.addEventListener(
+      "scroll",
+      () => {
+
+        const current =
+          window.scrollY;
+
+        scrollVelocity =
+          Math.min(
+            Math.abs(
+              current - lastScroll
+            ),
+            30
+          );
+
+        lastScroll = current;
+
+        document.documentElement
+          .style.setProperty(
+            "--scroll-speed",
+            `${scrollVelocity}px`
+          );
+
+      },
+      { passive: true }
+    );
+
+  }
+
+
+  /* =======================================================
+     SMOOTH REVEAL STAGGER
+     ======================================================= */
+
+  const revealGroups =
+    document.querySelectorAll(
+      ".features, " +
+      ".flow, " +
+      ".commitment-stack, " +
+      ".control-panel"
+    );
+
+  const revealGroupObserver =
+    new IntersectionObserver(
+      entries => {
+
+        entries.forEach(entry => {
+
+          if (!entry.isIntersecting)
+            return;
+
+          const children =
+            entry.target.children;
+
+          Array.from(children).forEach(
+            (child, index) => {
+
+              child.style.transitionDelay =
+                `${index * 80}ms`;
+
+            }
+          );
+
+          revealGroupObserver
+            .unobserve(
+              entry.target
+            );
+
+        });
+
+      },
+      {
+        threshold: .15
+      }
+    );
+
+  revealGroups.forEach(
+    group =>
+      revealGroupObserver.observe(group)
+  );
+
+
+})();
 </script>
 
 </body>
